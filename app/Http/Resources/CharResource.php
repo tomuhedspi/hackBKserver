@@ -22,6 +22,9 @@ class CharResource extends JsonResource
             'image' => $this->image, 
             'book' => $this->book, 
             'meaning' => $this->meaning,
+            'type' => $this->type,
+            'kun' => $this->kun,
+            'on' => $this->on,
             'comment' => new CommentCollection($this->comments)
         ];
         return $data;

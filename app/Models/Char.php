@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Char extends Model
 {
     use HasFactory;
-    protected $fillable = ['word', 'read', 'note', 'image', 'book', 'status', 'meaning'];
+    protected $fillable = ['word', 'read', 'note', 'image', 'book', 'status', 'meaning', 'type', 'kun', 'on'];
     
     public function comments ()
     {

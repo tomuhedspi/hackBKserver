@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreReportRequest;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function store (StoreReportRequest $request)
+    public function store (Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'char' => 'required|max:255',
