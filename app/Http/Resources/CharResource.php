@@ -17,7 +17,8 @@ class CharResource extends JsonResource
         $data = [
             'id' => $this->id,
             'word' => $this->word, 
-            'read' => $this->read,
+            'reading' => $this->reading,
+            'read' => $this->reading,
             'note' => $this->note, 
             'image' => $this->image, 
             'book' => $this->book, 
