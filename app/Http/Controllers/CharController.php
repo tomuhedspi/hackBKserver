@@ -53,7 +53,7 @@ class CharController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'word' => 'required|max:255',
-            'read' => 'required|max:255',
+            'reading' => 'required|max:255',
             'note' => 'required|max:255',
             'book' => 'nullable|max:255',
             'meaning' => 'required|max:255',

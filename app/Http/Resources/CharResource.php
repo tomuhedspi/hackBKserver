@@ -26,6 +26,8 @@ class CharResource extends JsonResource
             'type' => $this->type,
             'kun' => $this->kun,
             'on' => $this->on,
+            'example' => $this->example,
+            'status' => $this->status,
             'comment' => new CommentCollection($this->comments)
         ];
         return $data;
