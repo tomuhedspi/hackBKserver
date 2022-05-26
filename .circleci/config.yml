@@ -49,3 +49,14 @@ jobs:
              ssh rootR@$103.130.213.12
              "cd /var/www/html/tabu"
              "git pull"
+workflows:
+   version: 2
+   build-and-deploy:
+     jobs:
+       - build
+       - deploy:
+           requires:
+             - build # only deploy once build job has completed
+           filters:
+             branches:
+               only: master # only deploy on the main branch
