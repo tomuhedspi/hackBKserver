@@ -12,7 +12,8 @@ jobs:
       # for database intensive operations.
       # - image: circleci/mysql:5.7-ram
       # - image: redis:3
-      - image: circleci/mysql:8.0.20-ram
+      - image: cimg/go:1.17
+      - image: cimg/mysql:8.0
         command: mysqld --default-authentication-plugin=mysql_native_password
         environment:
           MYSQL_USER: tabu
