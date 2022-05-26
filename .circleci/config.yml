@@ -10,7 +10,7 @@
        - run:
            name: Deploy Over SSH
            command: |
-             ssh root@103.130.213.12 "php -v"
+             ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
 
  workflows:
    version: 2
