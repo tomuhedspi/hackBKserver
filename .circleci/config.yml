@@ -39,4 +39,13 @@ jobs:
       - run:
           name: "Generate App key"
           command: php artisan key:generate
-
+  deploy:
+     machine:
+       enabled: true
+     steps:
+       - run:
+           name: Deploy Over SSH
+           command: |
+             ssh rootR@$103.130.213.12
+             "cd /var/www/html/tabu"
+             "git pull"
