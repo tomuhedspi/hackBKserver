@@ -13,7 +13,7 @@ class CharController extends Controller
 {
     public function index ()
     {
-        $chars = Char::with('comments.interactive')->paginate(1);
+        $chars = Char::with('comments.interactive')->paginate(20);
         $response = [
             'status' => 200,
             'data' => new CharCollection($chars)
