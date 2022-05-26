@@ -18,4 +18,4 @@ jobs:
             - vendor
 
       # run test
-      - run: phpcs --standard=Framgia app
+      - run: phpcs --standard=Hack app
