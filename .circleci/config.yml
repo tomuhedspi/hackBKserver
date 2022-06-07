@@ -28,7 +28,7 @@
      jobs:
        - deploy:
            post-steps:
-             - jira/notify:
+             - jira/notify
            filters:
              branches:
                only: master # only deploy master branch
