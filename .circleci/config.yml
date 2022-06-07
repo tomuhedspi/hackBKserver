@@ -4,6 +4,7 @@
    build:
      docker:
        - image: 'cimg/base:stable'
+    
      steps:
        - run: echo "hello"
    deploy:
@@ -32,4 +33,4 @@
                job_type: deployment
            filters:
              branches:
-               only: master # only deploy on the main branch
+               only: master # only deploy master branch
