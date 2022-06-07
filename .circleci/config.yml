@@ -2,7 +2,10 @@
 
  jobs:
    build:
-     #...
+     docker:
+       - image: 'circleci/node:10'
+     steps:
+       - run: echo "hello tabu"
    deploy:
      machine:
        enabled: true
@@ -11,11 +14,15 @@
            name: Deploy Over SSH
            command: |
              ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
-
+ orbs: 
+   jira: circleci/jira@1.3.1
  workflows:
    version: 2
    build-and-deploy:
      jobs:
+       - build:
+           post-steps:
+             - jira/notify
        - deploy:
            filters:
              branches:
