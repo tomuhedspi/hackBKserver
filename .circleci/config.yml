@@ -29,8 +29,6 @@
        - deploy:
            post-steps:
              - jira/notify:
-               environment_type: development
-               job_type: deployment
            filters:
              branches:
                only: master # only deploy master branch
