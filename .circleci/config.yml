@@ -6,6 +6,7 @@
        - image: 'circleci/node:10'
      steps:
        - run: echo "hello tabu"
+       
    deploy:
      machine:
        enabled: true
@@ -21,9 +22,11 @@
    build-and-deploy:
      jobs:
        - build:
-           post-steps:
-             - jira/notify
        - deploy:
+           post-steps:
+             - jira/notify:
+               environment_type: development
+               job_type: deployment
            filters:
              branches:
                only: master # only deploy on the main branch
