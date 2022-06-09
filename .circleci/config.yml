@@ -6,8 +6,7 @@
        - image: 'circleci/node:10'
      steps:
        - telegram/notify:
-           message: $GIT_COMMIT_DESC \n Build Successfully.
-           when: on_fail
+           message: Build Successfully.
    deploy:
      machine:
        enabled: true
