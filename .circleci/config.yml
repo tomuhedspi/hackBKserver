@@ -1,7 +1,7 @@
  version: 2.1
 
  jobs:
-   noti_success:
+   build:
      docker:
        - image: 'circleci/node:10'
      steps:
@@ -18,15 +18,15 @@
  orbs: # adds orbs to your configuration
    telegram: woltsu/telegram@0.0.9
  workflows:
-   noti:
-     requires:
-       - deploy
-     when: on_success
-     jobs:
-       - noti_success
    deploy:
      jobs:
        - deploy:
            filters:
              branches:
                only: master # only deploy master branch
+   build:
+     requires:
+       - deploy
+     when: on_success
+     jobs:
+       - build
