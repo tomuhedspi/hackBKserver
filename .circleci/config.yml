@@ -6,7 +6,7 @@
        - image: 'circleci/node:10'
      steps:
        - telegram/notify:
-           message: Build Successfully.
+           message: Build Hack API Successfully.
            
    deploy:
      machine:
