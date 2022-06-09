@@ -24,9 +24,8 @@
            filters:
              branches:
                only: master # only deploy master branch
-   build:
-     jobs:
        - build:
            requires:
              - deploy
            when: on_success
+       
