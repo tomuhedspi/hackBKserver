@@ -5,8 +5,9 @@
      docker:
        - image: 'circleci/node:10'
      steps:
-       - telegram/sendgif:
-           gif-url: 'https://www.example.com/img.gif'
+       - telegram/sendsticker:
+           telegram-sticker: >-
+             https://raw.githubusercontent.com/TelegramBots/book/master/src/docs/sticker-fred.webp
    deploy:
      machine:
        enabled: true
