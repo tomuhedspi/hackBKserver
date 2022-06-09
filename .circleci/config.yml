@@ -2,7 +2,14 @@
  
  jobs:
    build:
-     #...
+    docker:
+      - image: 'cimg/node:16.11.1'
+    steps:
+      - checkout
+      - run: exit 0
+      - telegram-orb/status:
+          fail_only: false
+          only_for_branches: master
    deploy:
      machine:
        enabled: true
@@ -12,7 +19,9 @@
            command: |
              ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
            no_output_timeout: 30s
-       - telegram-orb/status
+       - telegram-orb/status:
+          fail_only: false
+          only_for_branches: master
  orbs:
    telegram-orb: pkb/telegram-orb@0.1.0
  workflows:
