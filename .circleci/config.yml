@@ -26,4 +26,4 @@
        - deploy:
            filters:
              branches:
-               only: master # only deploy master branch
+               only: master # only deploy master branchh
