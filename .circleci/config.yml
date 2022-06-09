@@ -28,5 +28,7 @@
            filters:
              branches:
                only: master # only deploy master branch
-       - build
+       - build:
+            requires:
+              - deploy
        
