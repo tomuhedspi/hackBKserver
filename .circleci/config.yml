@@ -10,7 +10,7 @@
        - run:
            name: Deploy Over SSH
            command: |
-             ssh roott@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
+             ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
            no_output_timeout: 30s
        - telegram-orb/status
  orbs:
