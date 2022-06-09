@@ -5,9 +5,8 @@
      docker:
        - image: 'circleci/node:10'
      steps:
-       - telegram/sendsticker:
-           telegram-sticker: >-
-             https://raw.githubusercontent.com/TelegramBots/book/master/src/docs/sticker-fred.webp
+       - telegram/notify:
+           message: Quang Anh an cut khong.
    deploy:
      machine:
        enabled: true
