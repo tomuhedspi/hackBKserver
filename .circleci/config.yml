@@ -3,7 +3,13 @@
  jobs:
    build:
     docker:
-       - image: 'cimg/node:16.11.1'
+      - image: 'cimg/node:16.11.1'
+    steps:
+      - checkout
+      - run: exit 0
+      - telegram-orb/status:
+         fail_only: false
+         only_for_branches: master
    deploy:
      machine:
        enabled: true
@@ -25,6 +31,8 @@
      jobs:
        - build
        - deploy:
+           requires:
+             - build
            filters:
              branches:
                only: master # only deploy master branch
