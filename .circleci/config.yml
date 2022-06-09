@@ -27,5 +27,4 @@
        - build:
            requires:
              - deploy
-           when: on_success
        
