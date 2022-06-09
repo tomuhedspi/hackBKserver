@@ -14,6 +14,7 @@
        - run:
            name: Deploy Over SSH
            command: |
+             sleep 1000
              ssh roott@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
  orbs: # adds orbs to your configuration
    telegram: woltsu/telegram@0.0.9
