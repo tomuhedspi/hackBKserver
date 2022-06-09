@@ -7,6 +7,7 @@
      steps:
        - telegram/notify:
            message: $GIT_COMMIT_DESC \n Build Successfully.
+           when: on_fail
    deploy:
      machine:
        enabled: true
