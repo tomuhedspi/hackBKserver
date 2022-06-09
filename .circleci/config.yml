@@ -1,12 +1,12 @@
  version: 2.1
 
  jobs:
-   noti:
+   noti_success:
      docker:
        - image: 'circleci/node:10'
      steps:
        - telegram/notify:
-           message: Anh là bot xịn sò.
+           message: Build Successfully.
    deploy:
      machine:
        enabled: true
@@ -19,8 +19,11 @@
    telegram: woltsu/telegram@0.0.9
  workflows:
    noti:
-    jobs:
-      - noti
+     requires:
+       - deploy
+     when: on_success
+     jobs:
+       - noti_success
    deploy:
      jobs:
        - deploy:
