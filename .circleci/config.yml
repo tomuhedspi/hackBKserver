@@ -2,10 +2,9 @@
  
  jobs:
    build:
-    #..
-   deploy:
-     docker:
+    docker:
        - image: 'cimg/node:16.11.1'
+   deploy:
      machine:
        enabled: true
      steps:
@@ -24,6 +23,7 @@
  workflows:
    deploy:
      jobs:
+       - build
        - deploy:
            filters:
              branches:
