@@ -1,9 +1,7 @@
  version: 2.1
 
  jobs:
-   build:
-     docker:
-       - image: 'circleci/node:10'
+   notify:
      steps:
        - telegram/notify:
            message: Anh là bot xịn sò.
@@ -18,9 +16,9 @@
  orbs: # adds orbs to your configuration
    telegram: woltsu/telegram@0.0.9
  workflows:
-   build:
+   notify:
     jobs:
-      - build
+      - notify
    deploy:
      jobs:
        - deploy:
