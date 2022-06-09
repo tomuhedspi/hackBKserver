@@ -3,10 +3,10 @@
  jobs:
    build:
      docker:
-       - image: 'circleci/node:10'
+#        - image: 'circleci/node:10'
      steps:
        - telegram/notify:
-           message: Quang Anh an cut khong.
+           message: Anh là bot xịn sò.
    deploy:
      machine:
        enabled: true
