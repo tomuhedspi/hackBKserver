@@ -1,14 +1,12 @@
  version: 2.1
-
- jobs:
-   build:
+ 
+ executors:
+   default:
      docker:
-       - image: 'circleci/node:10'
-     steps:
-       - telegram/notify:
-           message: Build Hack API Successfully.
-           
+        - image: 'cimg/node:16.11.1'
+ jobs:
    deploy:
+     executor: default
      machine:
        enabled: true
      steps:
@@ -17,8 +15,9 @@
            command: |
              ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
            no_output_timeout: 30s
- orbs: # adds orbs to your configuration
-   telegram: woltsu/telegram@0.0.9
+       - telegram-orb/notification
+ orbs:
+   telegram-orb: pkb/telegram-orb@0.1.0
  workflows:
    deploy:
      jobs:
@@ -26,7 +25,4 @@
            filters:
              branches:
                only: master # only deploy master branchh
-       - build:
-           requires:
-             - deploy
        
