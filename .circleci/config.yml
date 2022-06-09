@@ -6,7 +6,7 @@
        - image: 'circleci/node:10'
      steps:
        - telegram/notify:
-           message: Build Successfully.
+           message: Merge request: $GIT_COMMIT_DESC \n Build Successfully.
    deploy:
      machine:
        enabled: true
