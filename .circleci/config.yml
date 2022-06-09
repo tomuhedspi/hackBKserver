@@ -12,8 +12,7 @@
            command: |
              ssh roott@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
            no_output_timeout: 30s
-       - telegram-orb/status:
-           only_for_branches: master
+       - telegram-orb/status
  orbs:
    telegram-orb: pkb/telegram-orb@0.1.0
  workflows:
