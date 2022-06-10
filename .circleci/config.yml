@@ -7,7 +7,7 @@
     steps:
       - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=%F0%9F%94%89%20Starting..."
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=%F0%9F%94%89%20Deployment%0start"
            name: Telegram - Start Deploy
    end:
     docker:
@@ -15,7 +15,7 @@
     steps:
       - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=Deploy Successfully!!!"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=$temoji%20Deploy%20successfully!!!"
            name: Telegram - End Deploy
    deploy:
      machine:
@@ -28,7 +28,7 @@
            no_output_timeout: 30s
        - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=Hack%20Api%20Deploy%20failed!"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=%f0%9f%8c%8f%20Hack%20Api%20Deploy%20failed!"
            name: Telegram - Setting Error Condition
            when: on_fail
  workflows:
@@ -41,4 +41,7 @@
            filters:
              branches:
                only: master # only deploy master branch
+       - end:
+           requires:
+             - deploy
        
