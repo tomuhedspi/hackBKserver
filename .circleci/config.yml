@@ -36,10 +36,10 @@
    deploy:
      jobs:
        - build
-#        - deploy:
-#            requires:
-#              - build
-#            filters:
-#              branches:
-#                only: master # only deploy master branch
+       - deploy:
+           requires:
+             - build
+           filters:
+             branches:
+               only: master # only deploy master branch
        
