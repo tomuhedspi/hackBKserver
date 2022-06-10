@@ -2,14 +2,16 @@
  
  jobs:
    start:
-#     docker:
-#       - image: 'cimg/node:16.11.1'
+    docker:
+      - image: 'cimg/node:16.11.1'
     steps:
       - run:
            command: |
              curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=%F0%9F%94%89%20Starting..."
            name: Telegram - Start Deploy
    end:
+    docker:
+      - image: 'cimg/node:16.11.1'
     steps:
       - run:
            command: |
