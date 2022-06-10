@@ -5,43 +5,41 @@
     docker:
       - image: 'cimg/node:16.11.1'
     steps:
-      - checkout
-      - run: exit 0
-      - telegram-orb/status:
-         channel: "1333389399"
-         success_message: "Successfully"
-         failure_message: "Error"
-         webhook: "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s"
-         only_for_branches: master
-   deploy:
-     machine:
-       enabled: true
-     steps:
-       - run:
-           name: Deploy Over SSH
+      - run:
            command: |
-             ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
-           no_output_timeout: 30s
-       - run:
-           command: |
-             curl https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s/sendMessage?chat_id=1333389399&text=fail
-           name: Telegram - Setting Failure Condition
-           when: on_fail
-       - run:
-           command: |
-             curl https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s/sendMessage?chat_id=1333389399&text=success
+             curl "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s/sendMessage?chat_id=1333389399&text=success"
            name: Telegram - Setting Success Condition
-           when: on_success
- orbs:
-   telegram-orb: pkb/telegram-orb@0.1.0
+#       - checkout
+#       - run: exit 0
+#       - telegram-orb/status:
+#          channel: "1333389399"
+#          success_message: "Successfully"
+#          failure_message: "Error"
+#          webhook: "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s"
+#          only_for_branches: master
+#    deploy:
+#      machine:
+#        enabled: true
+#      steps:
+#        - run:
+#            name: Deploy Over SSH
+#            command: |
+#              ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
+#            no_output_timeout: 30s
+#        - run:
+#            command: |
+#              curl "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s/sendMessage?chat_id=1333389399&text=success"
+#            name: Telegram - Setting Success Condition
+#  orbs:
+#    telegram-orb: pkb/telegram-orb@0.1.0
  workflows:
    deploy:
      jobs:
-#        - build
-       - deploy:
+       - build
+#        - deploy:
 #            requires:
 #              - build
-           filters:
-             branches:
-               only: master # only deploy master branch
+#            filters:
+#              branches:
+#                only: master # only deploy master branch
        
