@@ -25,10 +25,12 @@
            name: Deploy Over SSH
            command: |
              ssh roott@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
+             TEXT="Deployment!!!"
+             TEXT=TEXT"Status"
            no_output_timeout: 30s
        - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=success"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text="${TEXT}"success"
            name: Telegram - Setting Success Condition
            when: on_success
        - run:
