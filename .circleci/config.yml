@@ -7,7 +7,7 @@
     steps:
       - run:
            command: |
-             curl "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s/sendMessage?chat_id=1333389399&text=test"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=test"
            name: Telegram - Setting Success Condition
 #       - checkout
 #       - run: exit 0
@@ -36,10 +36,10 @@
    deploy:
      jobs:
        - build
-       - deploy:
-           requires:
-             - build
-           filters:
-             branches:
-               only: master # only deploy master branch
+#        - deploy:
+#            requires:
+#              - build
+#            filters:
+#              branches:
+#                only: master # only deploy master branch
        
