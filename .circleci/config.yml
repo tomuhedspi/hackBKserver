@@ -22,8 +22,8 @@
            no_output_timeout: 30s
        - run: exit 0
        - telegram-orb/status:
-          channel: 1333389399
-          webhook: https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s
+          channel: "1333389399"
+          webhook: "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s"
           message: "%F0%9F%9A%A8 Build Failed: Please check details below: %0A %F0%9F%95%9C Date: $(date) %0A $temoji Job Number: $CIRCLE_BUILD_NUM %0A $temoji TRIGGERER: ${CIRCLE_USERNAME} %0A %F0%9F%93%8B MESSAGE: %F0%9F%98%A2 A $CIRCLE_JOB job has failed! %0A %f0%9f%8c%8f BUILD_URL: ${CIRCLE_BUILD_URL}${NOPRV} %0A"
           only_for_branches: master
  orbs:
