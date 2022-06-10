@@ -30,9 +30,11 @@
            no_output_timeout: 30s
        - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text="${TEXT}"success"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text="${GIT_COMMIT_DESC}"success"
            name: Telegram - Setting Success Condition
            when: on_success
+           environment:
+             GIT_COMMIT_DESC: $(git log --format=oneline -n 1 $CIRCLE_SHA1)
        - run:
            command: |
              curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=error"
