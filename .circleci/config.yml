@@ -8,7 +8,10 @@
       - checkout
       - run: exit 0
       - telegram-orb/status:
-         fail_only: false
+         channel: "1333389399"
+         success_message: "Successfully"
+         failure_message: "Error"
+         webhook: "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s"
          only_for_branches: master
    deploy:
      machine:
@@ -24,8 +27,6 @@
        - telegram-orb/status:
           channel: "1333389399"
           success_message: "Successfully"
-          message: "Test"
-          text: "Test"
           failure_message: "Error"
           webhook: "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s"
           only_for_branches: master
