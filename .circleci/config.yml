@@ -7,7 +7,7 @@
     steps:
       - run:
            command: |
-             curl "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s/sendMessage?chat_id=1333389399&text=success"
+             curl "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s/sendMessage?chat_id=1333389399&text=test"
            name: Telegram - Setting Success Condition
 #       - checkout
 #       - run: exit 0
@@ -17,19 +17,19 @@
 #          failure_message: "Error"
 #          webhook: "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s"
 #          only_for_branches: master
-#    deploy:
-#      machine:
-#        enabled: true
-#      steps:
-#        - run:
-#            name: Deploy Over SSH
-#            command: |
-#              ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
-#            no_output_timeout: 30s
-#        - run:
-#            command: |
-#              curl "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s/sendMessage?chat_id=1333389399&text=success"
-#            name: Telegram - Setting Success Condition
+   deploy:
+     machine:
+       enabled: true
+     steps:
+       - run:
+           name: Deploy Over SSH
+           command: |
+             ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
+           no_output_timeout: 30s
+       - run:
+           command: |
+             curl "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s/sendMessage?chat_id=1333389399&text=success"
+           name: Telegram - Setting Success Condition
 #  orbs:
 #    telegram-orb: pkb/telegram-orb@0.1.0
  workflows:
