@@ -28,12 +28,12 @@
            no_output_timeout: 30s
        - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=Hack Api Deploy successfully!"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=Hack%20Api%20Deploy%20successfully!"
            name: Telegram - Setting Success Condition
            when: on_success
        - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=Hack Api Deploy failed!"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=Hack%20Api%20Deploy%20failed!"
            name: Telegram - Setting Error Condition
            when: on_fail
 #  orbs:
