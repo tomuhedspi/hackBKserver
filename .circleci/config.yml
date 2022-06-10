@@ -1,22 +1,20 @@
  version: 2.1
  
  jobs:
-   build:
-    docker:
-      - image: 'cimg/node:16.11.1'
+   start:
+#     docker:
+#       - image: 'cimg/node:16.11.1'
     steps:
       - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=test"
-           name: Telegram - Setting Success Condition
-#       - checkout
-#       - run: exit 0
-#       - telegram-orb/status:
-#          channel: "1333389399"
-#          success_message: "Successfully"
-#          failure_message: "Error"
-#          webhook: "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s"
-#          only_for_branches: master
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=%F0%9F%94%89%20Starting..."
+           name: Telegram - Start Deploy
+   end:
+    steps:
+      - run:
+           command: |
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=Deploy Successfully!!!"
+           name: Telegram - End Deploy
    deploy:
      machine:
        enabled: true
@@ -28,23 +26,16 @@
            no_output_timeout: 30s
        - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=%F0%9F%94%89%20Build%20Succeeded:%20Please%20check%20details%20below:%20%0A%20%F0%9F%95%9C%20Date:%20"$(date)" %0A $temoji Job Number: "$CIRCLE_BUILD_NUM" %0A%20$temoji%20TRIGGERER:%20"${CIRCLE_USERNAME}"%20%0A%20%F0%9F%93%8B%20MESSAGE:%20%F0%9F%98%84%20A"$CIRCLE_JOB"%20job%20has%20succeeded!%20%0A%20%f0%9f%8c%8f%20BUILD_URL:%20"${CIRCLE_BUILD_URL}${NOPRV}"%20%0A"
-           name: Telegram - Setting Success Condition
-           when: on_success
-       - run:
-           command: |
              curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=Hack%20Api%20Deploy%20failed!"
            name: Telegram - Setting Error Condition
            when: on_fail
-#  orbs:
-#    telegram-orb: pkb/telegram-orb@0.1.0
  workflows:
    deploy:
      jobs:
-       - build
+       - start
        - deploy:
            requires:
-             - build
+             - start
            filters:
              branches:
                only: master # only deploy master branch
