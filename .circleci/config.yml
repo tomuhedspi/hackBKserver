@@ -15,7 +15,7 @@
     steps:
       - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=$temoji%20Deploy%20successfully!!!"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=✅%20Deploy%20successfully!!!"
            name: Telegram - End Deploy
    deploy:
      machine:
