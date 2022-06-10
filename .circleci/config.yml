@@ -25,21 +25,21 @@
            name: Deploy Over SSH
            command: |
              ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
-             TEXT="Deployment!!!"
-             TEXT=TEXT"Status"
            no_output_timeout: 30s
        - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text="${GIT_COMMIT_DESC}"success"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text="${MESSAGE}
            name: Telegram - Setting Success Condition
            when: on_success
            environment:
-             GIT_COMMIT_DESC: $(git log --format=oneline -n 1 $CIRCLE_SHA1)
+             MESSAGE: "Hack Api Deploy successfully!"
        - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=error"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text="${MESSAGE}
            name: Telegram - Setting Error Condition
            when: on_fail
+           environment:
+             MESSAGE: "Hack Api Deploy failed!"
 #  orbs:
 #    telegram-orb: pkb/telegram-orb@0.1.0
  workflows:
