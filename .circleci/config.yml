@@ -28,18 +28,24 @@
            no_output_timeout: 30s
        - run:
            command: |
-             curl "https://api.telegram.org/bot5399404697:AAGDtkC58-d5mr3Dba5bXLmwkrO-5Q9-r3s/sendMessage?chat_id=1333389399&text=success"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=success"
            name: Telegram - Setting Success Condition
+           when: on_success
+       - run:
+           command: |
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=error"
+           name: Telegram - Setting Error Condition
+           when: on_fail
 #  orbs:
 #    telegram-orb: pkb/telegram-orb@0.1.0
  workflows:
    deploy:
      jobs:
        - build
-#        - deploy:
-#            requires:
-#              - build
-#            filters:
-#              branches:
-#                only: master # only deploy master branch
+       - deploy:
+           requires:
+             - build
+           filters:
+             branches:
+               only: master # only deploy master branch
        
