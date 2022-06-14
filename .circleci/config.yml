@@ -1,8 +1,23 @@
- version: 2
-
+ version: 2.1
+ 
  jobs:
-   build:
-     #...
+   start:
+    docker:
+      - image: 'cimg/node:16.11.1'
+    steps:
+      - run:
+           command: |
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=🚘%20Deployment%20start%0A%20👨‍🦱 ${CIRCLE_USERNAME}"
+           name: Telegram - Start Deploy
+   end:
+    docker:
+      - image: 'cimg/node:16.11.1'
+    steps:
+      - run:
+           command: |
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=✅%20Deploy%20successfully!!!"
+           name: Telegram - End Deploy
+           no_output_timeout: 10s
    deploy:
      machine:
        enabled: true
@@ -11,12 +26,24 @@
            name: Deploy Over SSH
            command: |
              ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
-
+           no_output_timeout: 10s
+       - run:
+           command: |
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=❌%20Hack%20Api%20Deploy%20failed!"
+           name: Telegram - Setting Error Condition
+           when: on_fail
+           no_output_timeout: 10s
  workflows:
-   version: 2
-   build-and-deploy:
+   deploy:
      jobs:
+       - start
        - deploy:
+           requires:
+             - start
            filters:
              branches:
-               only: master # only deploy on the main branch
+               only: master # only deploy master branch
+       - end:
+           requires:
+             - deploy
+       
