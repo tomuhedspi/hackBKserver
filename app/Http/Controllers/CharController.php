@@ -11,12 +11,27 @@ use Illuminate\Http\Request;
 
 class CharController extends Controller
 {
-    public function index ()
+    public function index (Request $request)
     {
-        $chars = Char::with('comments.interactive')->paginate(20);
+        $chars = Char::with('comments.interactive');
+        if ($request->search) {
+            $search = $request->search;
+            $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
+                $q->where('word', 'like', "%$search%")->orWhere('reading', 'like', "%$search%");
+            });
+        }
+        if ($request->search_kanji) {
+            $search = $request->search_kanji;
+            $chars->where('type', Char::KANJI)->where(function ($q) use ($search) {
+                $q->where('word', 'like', "%$search%")->orWhere('reading', 'like', "%$search%");
+            });
+        }
+        if ($request->book) {
+            $chars->where('book', $request->book);
+        }
         $response = [
             'status' => 200,
-            'data' => new CharCollection($chars)
+            'data' => new CharCollection($chars->paginate(20))
         ];
 
         return response()->json($response, 200);
@@ -28,11 +43,11 @@ class CharController extends Controller
             'author_name' => 'required|max: 30',
             'content' => 'required|max: 225'
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()]);
         }
-        
+
         $comment = Comment::create([
             'author_name' => $request->author_name,
             'content' => $request->content,
@@ -58,7 +73,7 @@ class CharController extends Controller
             'book' => 'nullable|max:255',
             'meaning' => 'required|max:255',
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()]);
         }
@@ -72,5 +87,14 @@ class CharController extends Controller
         return response()->json([
             'status' => 500
         ], 500);
+    }
+
+    public function books ()
+    {
+        $books = Char::whereNotNull('book')->pluck('book')->unique()->values();
+        return response()->json([
+            'status' => 200,
+            'data' => $books
+        ], 200);
     }
 }

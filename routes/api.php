@@ -19,10 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-});  
+});
 
 Route::get('chars', [CharController::class, 'index']);
 Route::post('chars', [CharController::class, 'store']);
 Route::post('chars/{id}/comment', [CharController::class, 'storeComment']);
 Route::post('comments/{id}/interactive', [CommentController::class, 'interactive']);
 Route::post('reports', [ReportController::class, 'store']);
+Route::get('books', [CharController::class, 'books']);

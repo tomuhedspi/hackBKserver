@@ -9,7 +9,9 @@ class Char extends Model
 {
     use HasFactory;
     protected $fillable = ['word', 'read', 'note', 'image', 'book', 'status', 'meaning', 'type', 'kun', 'on'];
-    
+    const WORD = 0;
+    const KANJI = 1;
+
     public function comments ()
     {
         return $this->hasMany(Comment::class);
