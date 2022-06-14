@@ -7,7 +7,7 @@
     steps:
       - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=🚘%20Deployment%20start%0A%20TRIGGERER: ${CIRCLE_USERNAME}"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=🚘%20Deployment%20start%0A%20👨‍🦱 ${CIRCLE_USERNAME}"
            name: Telegram - Start Deploy
    end:
     docker:
