@@ -27,9 +27,7 @@
            command: |
              ssh root@103.130.213.12 "cd /var/www/html/tabu && 
              git pull origin master &&
-             export GIT_COMMIT_DESC=git log --format=format:%s -n 1 ${CIRCLE_SHA1}"
-             echo GIT_COMMIT_DESC="$GIT_COMMIT_DESC"
-             echo "export GIT_COMMIT_DESC=\"$GIT_COMMIT_DESC\"" >> $BASH_ENV
+             git log --format=format:%s -n 1 ${CIRCLE_SHA1}"
            no_output_timeout: 10s
        - run:
            command: |
