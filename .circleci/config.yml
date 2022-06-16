@@ -7,7 +7,7 @@
     steps:
       - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=🚘%20Deployment%20start%0A%20🔑%20${CIRCLE_BRANCH}%0A%20🚼%20${CIRCLE_BUILD_URL}%0A%20👨‍🦱 ${CIRCLE_USERNAME}"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=🚘%20Deployment%20start%0A%20🔑%20${CIRCLE_BRANCH}%0A%20🚼%20${GIT_COMMIT_DESC}%0A%20👨‍🦱 ${CIRCLE_USERNAME}"
            name: Telegram - Start Deploy
    end:
     docker:
@@ -36,7 +36,9 @@
  workflows:
    deploy:
      jobs:
-       - start
+       - start:
+           environment:
+             GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
        - deploy:
            requires:
              - start
