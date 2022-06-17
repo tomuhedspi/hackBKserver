@@ -28,6 +28,7 @@
              ssh root@103.130.213.12 "cd /var/www/html/tabu && 
              git pull origin master &&
              git log --format=format:%s -n 1 ${CIRCLE_SHA1}"
+             cci-export GIT_COMMIT_DESC "$(git log -1 --format='%s' HEAD)"
            no_output_timeout: 10s
        - run:
            command: |
