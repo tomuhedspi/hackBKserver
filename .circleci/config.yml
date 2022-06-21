@@ -7,7 +7,7 @@
     steps:
       - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=🚘%20Deployment%20start%0A%20👨‍🦱 ${CIRCLE_USERNAME}"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=🚘%20Deployment%20start%0A%20🔑%20${CIRCLE_BRANCH}%0A%20👨‍🦱 ${CIRCLE_USERNAME}"
            name: Telegram - Start Deploy
    end:
     docker:
@@ -25,7 +25,8 @@
        - run:
            name: Deploy Over SSH
            command: |
-             ssh root@103.130.213.12 "cd /var/www/html/tabu && git pull origin master"
+             ssh root@103.130.213.12 "cd /var/www/html/tabu && 
+             git pull origin master"
            no_output_timeout: 10s
        - run:
            command: |
@@ -38,8 +39,6 @@
      jobs:
        - start
        - deploy:
-           requires:
-             - start
            filters:
              branches:
                only: master # only deploy master branch
