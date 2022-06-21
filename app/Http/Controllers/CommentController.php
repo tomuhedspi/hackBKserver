@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreInteractiveRequest;
 use App\Models\Interactive;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function interactive (StoreInteractiveRequest $request, $id)
+    public function interactive (Request $request, $id)
     {
         $validator = \Validator::make($request->all(), [
             'status' => 'required',
             'device_fcm' => 'required'
         ]);
-        
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()]);
         }
