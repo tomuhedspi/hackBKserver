@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('chars', [CharController::class, 'index']);
+Route::get('chars/{id}', [CharController::class, 'show']);
 Route::post('chars', [CharController::class, 'store']);
 Route::post('chars/{id}/comment', [CharController::class, 'storeComment']);
 Route::post('comments/{id}/interactive', [CommentController::class, 'interactive']);

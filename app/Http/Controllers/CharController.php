@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCharRequest;
 use App\Http\Requests\StoreCommentRequest;
 use App\Http\Resources\CharCollection;
+use App\Http\Resources\CharResource;
 use App\Models\Char;
 use App\Models\Comment;
 use Illuminate\Http\Request;
@@ -20,15 +21,22 @@ class CharController extends Controller
                 $q->where('word', 'like', "%$search%")->orWhere('reading', 'like', "%$search%");
             });
         }
+
         if ($request->search_kanji) {
             $search = $request->search_kanji;
             $chars->where('type', Char::KANJI)->where(function ($q) use ($search) {
                 $q->where('word', 'like', "%$search%")->orWhere('reading', 'like', "%$search%");
             });
         }
+
         if ($request->book) {
             $chars->where('book', $request->book);
         }
+
+        if ($request->type) {
+            $chars->where('type', $request->type);
+        }
+
         $response = [
             'status' => 200,
             'data' => new CharCollection($chars->paginate(20))
@@ -96,5 +104,22 @@ class CharController extends Controller
             'status' => 200,
             'data' => $books
         ], 200);
+    }
+
+    public function show ($id)
+    {
+        $char = Char::with('comments.interactive')->find($id);
+        if ($char) {
+            $response = [
+                'status' => 200,
+                'data' => new CharResource($char)
+            ];
+        } else {
+            $response = [
+                'status' => 404,
+                'data' => []
+            ];
+        }
+        return response()->json($response, 200);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Char extends Model
 {
     use HasFactory;
-    protected $fillable = ['word', 'read', 'note', 'image', 'book', 'status', 'meaning', 'type', 'kun', 'on'];
+    protected $fillable = ['word', 'reading', 'note', 'image', 'book', 'status', 'meaning', 'type', 'kun', 'on'];
     const WORD = 0;
     const KANJI = 1;
 
