@@ -27,7 +27,7 @@
            command: |
              ssh root@103.130.213.12 "cd /var/www/html/tabu && 
              git pull origin master"
-           no_output_timeout: 10s
+           no_output_timeout: 30s
        - run:
            command: |
              curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=❌%20Hack%20Api%20Deploy%20failed!"
