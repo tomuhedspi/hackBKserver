@@ -106,13 +106,21 @@ class CharController extends Controller
         ], 200);
     }
 
-    public function show ($id)
+    public function show ($id, Request $request)
     {
         $char = Char::with('comments.interactive')->find($id);
+        $nextChar = Char::where('id', '>', $id)->where('type', $char->type);
+        $prevChar = Char::where('id', '<', $id)->where('type', $char->type)->orderByDesc('id');
+        if ($request->book) {
+            $nextChar->where('book', $char->book);
+            $prevChar->where('book', $char->book);
+        }
         if ($char) {
             $response = [
                 'status' => 200,
-                'data' => new CharResource($char)
+                'data' => new CharResource($char),
+                'next' => @$nextChar->first()->id ?: 0,
+                'prev' => @$prevChar->first()->id ?: 0,
             ];
         } else {
             $response = [
