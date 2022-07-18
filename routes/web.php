@@ -18,3 +18,6 @@ Route::get('/', function () {
     abort(404);
 });
 
+Route::get('privacy', function () {
+    return view('privacy');
+});
