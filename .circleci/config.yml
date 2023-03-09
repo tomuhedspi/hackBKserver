@@ -7,7 +7,7 @@
     steps:
       - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=🚘%20Deployment%20start%0A%20🔑%20${CIRCLE_BRANCH}%0A%20👨‍🦱 ${CIRCLE_USERNAME}"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=🚘%20Deployment%20thom.tabu1992.dev%20start%0A%20🔑%20${CIRCLE_BRANCH}%0A%20👨‍🦱 ${CIRCLE_USERNAME}"
            name: Telegram - Start Deploy
    end:
     docker:
@@ -25,12 +25,13 @@
        - run:
            name: Deploy Over SSH
            command: |
-             ssh root@103.130.213.13 "cd /var/www/html/hack-api &&
-             git pull origin master"
+             ssh root@103.130.213.12 "cd /var/www/html/lixi &&
+             git checkout -f  &&
+             git pull origin master
            no_output_timeout: 30s
        - run:
            command: |
-             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=❌%20Hack%20Api%20Deploy%20failed!"
+             curl ${TELEGRAM_WEBHOOK}"/sendMessage?chat_id="${TELEGRAM_GROUPID}"&text=❌%20thom.tabu1992.dev%20Deploy%20failed!"
            name: Telegram - Setting Error Condition
            when: on_fail
            no_output_timeout: 10s
@@ -45,4 +46,3 @@
        - end:
            requires:
              - deploy
-
