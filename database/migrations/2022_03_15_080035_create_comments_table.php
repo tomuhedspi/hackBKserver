@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('char_id');
             $table->string('author_name')->nullable();
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }

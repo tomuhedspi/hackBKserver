@@ -15,9 +15,9 @@ class CreateCharsTable extends Migration
     {
         Schema::create('chars', function (Blueprint $table) {
             $table->id();
-            $table->string('word');
-            $table->string('read');
-            $table->string('description')->nullable();
+            $table->string('word')->nullable();
+            $table->string('read')->nullable();
+            $table->text('description')->nullable();
             $table->string('note')->nullable();
             $table->string('image')->nullable();
             $table->string('book')->nullable();
