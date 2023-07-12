@@ -109,8 +109,14 @@ class CharController extends Controller
     public function show ($id, Request $request)
     {
         $char = Char::with('comments.interactive')->find($id);
-        $nextChar = Char::where('id', '>', $id)->where('type', $char->type);
-        $prevChar = Char::where('id', '<', $id)->where('type', $char->type)->orderByDesc('id');
+        if(empty($char->book)){
+            $nextChar = Char::where('id', '>', $id)->where('type', $char->type);
+            $prevChar = Char::where('id', '<', $id)->where('type', $char->type)->orderByDesc('id');
+        }else{
+            $nextChar = Char::where('id', '>', $id)->where('type', $char->type)->where('book', $char->book);
+            $prevChar = Char::where('id', '<', $id)->where('type', $char->type)->where('book', $char->book)->orderByDesc('id');
+        }
+       
         if ($request->book) {
             $nextChar->where('book', $char->book);
             $prevChar->where('book', $char->book);
