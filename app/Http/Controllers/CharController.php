@@ -18,14 +18,14 @@ class CharController extends Controller
         if ($request->search) {
             $search = $request->search;
             $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
-                $q->where('word', 'RLIKE', "[[:<:]]".$search."[[:>:]]")->orWhere('reading', 'RLIKE', "[[:<:]]".$search."[[:>:]]")->orWhere('meaning', 'RLIKE', "[[:<:]]".$search."[[:>:]]");
+                $q->where('word', 'like', "$search%")->orWhere('reading', 'like', "$search%")->orWhere('meaning', 'like', "$search%");
             });
         }
 
         if ($request->search_kanji) {
             $search = $request->search_kanji;
             $chars->where('type', Char::KANJI)->where(function ($q) use ($search) {
-                $q->where('word', 'RLIKE', "[[:<:]]".$search."[[:>:]]")->orWhere('reading', 'RLIKE', "[[:<:]]".$search."[[:>:]]")->orWhere('meaning', 'RLIKE', "[[:<:]]".$search."[[:>:]]");
+                $q->where('word', 'like', "$search%")->orWhere('reading', 'like', "$search%")->orWhere('meaning', 'like', "$search%");
             });
         }
 
