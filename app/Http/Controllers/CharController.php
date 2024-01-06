@@ -17,9 +17,15 @@ class CharController extends Controller
         $chars = Char::with('comments.interactive');
         if ($request->search) {
             $search = $request->search;
-            $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
-                $q->where('word', 'like', "$search%")->orWhere('reading', 'like', "$search%")->orWhere('meaning', 'like', "$search%");
-            });
+            if($this->isJapanese($search)){
+                $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
+                    $q->where('word', 'like', "%$search%")->orWhere('reading', 'like', "%$search%");
+                });
+            }else{
+                $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
+                    $q->where('meaning', 'like', "%$search%")->orWhere('note', 'like', "%$search%");
+                });
+            }
         }
 
         if ($request->search_kanji) {
@@ -135,5 +141,8 @@ class CharController extends Controller
             ];
         }
         return response()->json($response, 200);
+    }
+    private function isJapanese($lang) {
+        return preg_match('/[\x{4E00}-\x{9FBF}\x{3040}-\x{309F}\x{30A0}-\x{30FF}]/u', $lang);
     }
 }
