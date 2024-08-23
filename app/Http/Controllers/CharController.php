@@ -22,8 +22,27 @@ class CharController extends Controller
                     $q->where('word', 'like', "%$search%")->orWhere('reading', 'like', "%$search%");
                 });
             }else{
+                
                 $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
-                    $q->where('meaning', 'like', "%$search%")->orWhere('note', 'like', "%$search%");
+                    $startWithWord = $search . " ";
+                    $endWithWord = " " . $search ;
+                    $exactWord = $search ;
+                    $middleWord = " " .$search . " ";
+                    $commaLeftWord = "," . $search ;
+                    $commaRightWord = $search . ",";
+                    $bracketLeftWord = "(" . $search ;
+                    $bracketRightWord = $search . ")";
+                    $q->where('meaning', 'like', "$startWithWord%")
+                    ->orWhere('meaning', 'like', "%$endWithWord")
+                    ->orWhere('meaning', 'like', "$exactWord")
+                    ->orWhere('meaning', 'like', "%$middleWord%")
+                    
+                    ->orwhere('meaning', 'like', "%$commaLeftWord%")
+                    ->orWhere('meaning', 'like', "%$commaRightWord%")
+                    
+                    ->orwhere('meaning', 'like', "%$bracketLeftWord%")
+                    ->orWhere('meaning', 'like', "%$bracketRightWord%")
+                    ;
                 });
             }
         }
