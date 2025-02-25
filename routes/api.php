@@ -6,6 +6,8 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UnitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HintController;
+use App\Http\Controllers\EnglishHintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +32,5 @@ Route::post('comments/{id}/interactive', [CommentController::class, 'interactive
 Route::post('reports', [ReportController::class, 'store']);
 Route::get('books', [CharController::class, 'books']);
 Route::get('units', [UnitController::class, 'units']);
+Route::get('/hints', [HintController::class, 'getPhoneticHints']);
+Route::get('/hints/english', [EnglishHintController::class, 'getPhoneticHints']);
