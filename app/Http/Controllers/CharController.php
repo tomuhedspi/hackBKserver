@@ -15,14 +15,13 @@ class CharController extends Controller
     public function index (Request $request)
     {
         $chars = Char::with('comments.interactive');
-        if ($request->search) {
-            $search = $request->search;
+        $search = $request->search;
+        if(($request->type == Char::WORD || $request->type == Char::KANJI) && $search){
             if($this->isJapanese($search)){
                 $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
                     $q->where('word', 'like', "%$search%")->orWhere('reading', 'like', "%$search%");
                 });
             }else{
-                
                 $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
                     $startWithWord = $search . " ";
                     $endWithWord = " " . $search ;
@@ -46,7 +45,11 @@ class CharController extends Controller
                 });
             }
         }
-
+        if ($request->type == Char::ENGLISH && $search) {
+            $chars->where('type', Char::ENGLISH)->where(function ($q) use ($search) {
+                $q->where('word', 'like', "%$search%")->orWhere('meaning', 'like', "%$search%");
+            });
+        }
         if ($request->search_kanji) {
             $search = $request->search_kanji;
             $chars->where('type', Char::KANJI)->where(function ($q) use ($search) {

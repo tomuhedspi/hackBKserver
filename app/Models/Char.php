@@ -11,6 +11,7 @@ class Char extends Model
     protected $fillable = ['word', 'reading', 'note', 'image', 'book', 'status', 'meaning', 'type', 'kun', 'on'];
     const WORD = 0;
     const KANJI = 1;
+    const ENGLISH = 2;
 
     public function comments ()
     {
