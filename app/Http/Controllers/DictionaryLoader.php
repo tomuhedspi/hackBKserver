@@ -140,15 +140,66 @@ class DictionaryLoader
         return $dictFinalConsonant;
     }
 
+    public function loadJapaneseSimilarPronunciationData(): array
+    {
+        $dictJapaneseSimilarPronunciation = [];
+        $csvFilePath = resource_path('csv/JAPANESE_SIMILAR_PRONUNCIATION.csv');
+        if (($handle = fopen($csvFilePath, "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $key = $data[0];
+                $values = array_filter(array_slice($data, 1), function($value) {
+                    return $value !== '';
+                });
+                $dictJapaneseSimilarPronunciation[$key] = $values;
+            }
+            fclose($handle);
+        }
+        return $dictJapaneseSimilarPronunciation;
+    }
+
+    public function loadJapaneseVietnameseData(): array
+    {
+        $dictJapaneseVietnamese = [];
+        $csvFilePath = resource_path('csv/JAPANESE_VIETNAMESE_DICTIONARY.csv');
+        if (($handle = fopen($csvFilePath, "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $key = $data[0];
+                $values = array_filter(array_slice($data, 1), function($value) {
+                    return $value !== '';
+                });
+                $dictJapaneseVietnamese[$key] = $values;
+            }
+            fclose($handle);
+        }
+        return $dictJapaneseVietnamese;
+    }
+
     public function sortByKeyLength(&$array) {
         uksort($array, function($key1, $key2) {
             return mb_strlen($key2, 'UTF-8') - mb_strlen($key1, 'UTF-8');
         });
     }
 
-    public function loadDictData(): array
+    public function loadDictDataForJapaneseHint(): array
     {
-        return Cache::remember('dictionary_data', self::CACHE_TTL, function () {
+        return Cache::remember('dictionary_data_japanese', self::CACHE_TTL, function () {
+            $dictJapaneseSimilarPronunciation = $this->loadJapaneseSimilarPronunciationData();
+            $dictJapaneseVietnamese = $this->loadJapaneseVietnameseData();
+
+            // Sort the dictionaries by key length
+            $this->sortByKeyLength($dictJapaneseSimilarPronunciation);
+            $this->sortByKeyLength($dictJapaneseVietnamese);
+
+            return [
+                'DICT_JAPANESE_SIMILAR_PRONUNCIATION' => $dictJapaneseSimilarPronunciation,
+                'DICT_JAPANESE_VIETNAMESE' => $dictJapaneseVietnamese,
+            ];
+        });
+    }
+
+    public function loadDictDataForEnglishHint(): array
+    {
+        return Cache::remember('dictionary_data_english', self::CACHE_TTL, function () {
             $dictVietnamese = $this->loadDictVietnameseData();
             $dictInitialConsonant = $this->loadInitialConsonantData();
             $dictSingleConsonant = $this->loadSingleConsonantData();

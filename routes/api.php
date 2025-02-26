@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HintController;
 use App\Http\Controllers\EnglishHintController;
+use App\Http\Controllers\JapaneseHintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,4 @@ Route::get('books', [CharController::class, 'books']);
 Route::get('units', [UnitController::class, 'units']);
 Route::get('/hints', [HintController::class, 'getPhoneticHints']);
 Route::get('/hints/english', [EnglishHintController::class, 'getPhoneticHints']);
+Route::get('/hints/japanese', [JapaneseHintController::class, 'getPhoneticHints']);

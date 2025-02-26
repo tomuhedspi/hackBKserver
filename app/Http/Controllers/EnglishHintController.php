@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Char;
 use League\Csv\Reader;
+use App\Utils\StringUtils;
 
 class EnglishHintController extends Controller
 {
@@ -27,7 +28,7 @@ class EnglishHintController extends Controller
     private function loadDictData()
     {
         // Load the dictionary data from cache
-        $dictionaries = $this->dictionaryLoader->loadDictData();
+        $dictionaries = $this->dictionaryLoader->loadDictDataForEnglishHint();
         $this->DICT_FINAL_CONSONANT = $dictionaries['DICT_FINAL_CONSONANT'];
         $this->DICT_INITIAL_CONSONANT = $dictionaries['DICT_INITIAL_CONSONANT'];
         $this->DICT_SINGLE_CONSONANT = $dictionaries['DICT_SINGLE_CONSONANT'];
@@ -130,15 +131,11 @@ class EnglishHintController extends Controller
     {
         $spaceAdded = '';
         $splited = explode(self::SEPARATE_CHARACTER, $phonetic);
-        for ($i = 0; $i < count($splited) ; $i++) {
+        for ($i = 0; $i < count($splited) - 1 ; $i++) {
             $currentChar = $splited[$i];
             $prevChar = $splited[$i - 1] ?? '';
             $nextChar = $splited[$i + 1] ?? '';
             if (mb_strlen($currentChar, 'UTF-8') == 0) {
-                continue;
-            }
-            if($this->isSingleConsonant($currentChar)) {
-                $spaceAdded .= self::WORD_SEPARATE_CHARACTER . $currentChar . self::WORD_SEPARATE_CHARACTER;
                 continue;
             }
             if ( $this->isConsonant($currentChar) && $this->isVowel($nextChar)) {
@@ -146,7 +143,7 @@ class EnglishHintController extends Controller
                 $spaceAdded .= self::WORD_SEPARATE_CHARACTER . $currentChar . self::SEPARATE_CHARACTER;
                 continue;
             }
-            if ( $this->isVowel($currentChar)) {
+            if ( $this->isVowel($nextChar)) {
                 //nếu là nguyên âm thì giữ nguyên
                 $spaceAdded .= self::SEPARATE_CHARACTER . $currentChar . self::SEPARATE_CHARACTER;
                 continue;
@@ -160,7 +157,7 @@ class EnglishHintController extends Controller
             if (mb_strlen($currentChar, 'UTF-8') >= 2) {
                 // neu có nhiều consonant đứng cạnh nhau ở cuối từ thì nó có thể là single consonant hoặc final consonant-> chia cắt
                 if($i == count($splited) - 1) {
-                    $spaceAdded .= self::SEPARATE_CHARACTER . $this->separateLastSingleConsonant($currentChar);
+                    $spaceAdded .= self::SEPARATE_CHARACTER . separateLastSingleConsonant($currentChar);
                     continue;
                 }
                 // nếu có nhiều ký tự liền nhau không phải là nguyên âm thì chia cắt
@@ -224,7 +221,7 @@ class EnglishHintController extends Controller
     private function getSentences(string $phonetic): array
     {
         $smallPartsArray = $this->getVietNamesePart($phonetic);
-        $wordsArray = $this->combineStrings($smallPartsArray);
+        $wordsArray = StringUtils::combineStrings($smallPartsArray);
         return $wordsArray;
     }
 
@@ -261,37 +258,6 @@ class EnglishHintController extends Controller
         return $hintCharacters;
     }
 
-    private function combineStrings(array $arrays, string $separateCharacter = ''): array 
-    {
-        if (empty($arrays)) {
-            return [];
-        }
-    
-        $result = [[]];
-    
-        foreach ($arrays as $currentArray) {
-            if (empty($currentArray)) {
-                return [];
-            }
-    
-            $temp = [];
-            foreach ($result as $existingCombination) {
-                foreach ($currentArray as $element) {
-                    $temp[] = array_merge($existingCombination, [$element]);
-                }
-            }
-            $result = $temp;
-        }
-    
-        // Chuyển các mảng kết hợp thành chuỗi
-        $output = [];
-        foreach ($result as $combination) {
-            $output[] = implode($separateCharacter, $combination);
-        }
-    
-        return $output;
-    }
-
     private function getVietNameseSentences(array $sentencesArray): array
     {
         $result = [];
@@ -320,7 +286,7 @@ class EnglishHintController extends Controller
                 $vietnameseHint[] = $hintForWord;
             }
         }
-        $result = $this->combineStrings($vietnameseHint, self::SEPARATE_CHARACTER);
+        $result = StringUtils::combineStrings($vietnameseHint, self::SEPARATE_CHARACTER);
         return $result;
     }
 
