@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 
 class DictionaryLoader
 {
-    private const CACHE_TTL = 60 * 60 * 24; // Cache for 24 hours
+    private const CACHE_TTL = 60 * 60 * 4; // Cache for 4 hours
 
     public function loadDictVietnameseData(): array
     {
