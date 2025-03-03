@@ -131,19 +131,19 @@ class EnglishHintController extends Controller
     {
         $spaceAdded = '';
         $splited = explode(self::SEPARATE_CHARACTER, $phonetic);
-        for ($i = 0; $i < count($splited) - 1 ; $i++) {
+        for ($i = 0; $i < count($splited) ; $i++) {
             $currentChar = $splited[$i];
             $prevChar = $splited[$i - 1] ?? '';
             $nextChar = $splited[$i + 1] ?? '';
             if (mb_strlen($currentChar, 'UTF-8') == 0) {
                 continue;
             }
-            if ( $this->isConsonant($currentChar) && $this->isVowel($nextChar)) {
+            if ( $this->isInitialConsonant($currentChar) && $this->isVowel($nextChar)) {
                 // mot ky tu consonant   đứng trước nguyên âm thì nó ưu tiên cho nguyên âm đó
                 $spaceAdded .= self::WORD_SEPARATE_CHARACTER . $currentChar . self::SEPARATE_CHARACTER;
                 continue;
             }
-            if ( $this->isVowel($nextChar)) {
+            if ( $this->isVowel($currentChar)) {
                 //nếu là nguyên âm thì giữ nguyên
                 $spaceAdded .= self::SEPARATE_CHARACTER . $currentChar . self::SEPARATE_CHARACTER;
                 continue;
@@ -157,7 +157,7 @@ class EnglishHintController extends Controller
             if (mb_strlen($currentChar, 'UTF-8') >= 2) {
                 // neu có nhiều consonant đứng cạnh nhau ở cuối từ thì nó có thể là single consonant hoặc final consonant-> chia cắt
                 if($i == count($splited) - 1) {
-                    $spaceAdded .= self::SEPARATE_CHARACTER . separateLastSingleConsonant($currentChar);
+                    $spaceAdded .= self::SEPARATE_CHARACTER . $this->separateLastSingleConsonant($currentChar);
                     continue;
                 }
                 // nếu có nhiều ký tự liền nhau không phải là nguyên âm thì chia cắt
@@ -196,6 +196,10 @@ class EnglishHintController extends Controller
 
     private function separateTwoConsonant(string $consonantString): string
     {
+        if($this->isSingleConsonant($consonantString)) {
+            return self::WORD_SEPARATE_CHARACTER . $consonantString . self::WORD_SEPARATE_CHARACTER;
+        }
+
         foreach ($this->DICT_INITIAL_CONSONANT as $key => $value) {
             if (mb_substr($consonantString, -mb_strlen($key, 'UTF-8'), null, 'UTF-8') === $key) {
                 $leftPart = mb_substr($consonantString, 0, -mb_strlen($key, 'UTF-8'), 'UTF-8');
