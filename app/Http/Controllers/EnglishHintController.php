@@ -115,8 +115,8 @@ class EnglishHintController extends Controller
             //nếu phần hiện tại là nguyên âm đơn (vowl) thì thêm dấu cách vào trước và sau
             for ($i = 0; $i < mb_strlen($part, 'UTF-8'); $i++) {
                 $currentChar = mb_substr($part, $i, 1, 'UTF-8');
-                $prevChar = mb_substr($part, $i - 1, 1, 'UTF-8') ?? '';
-                $nextChar = mb_substr($part, $i + 1, 1, 'UTF-8') ?? '';
+                $prevChar = $this->getPrevChar($part, $i);
+                $nextChar = $this->getNextChar($part, $i);
                 if ($this->isVowel($currentChar) && !$this->isVowel($prevChar) && !$this->isVowel($nextChar)) {
                     $spaceAdded .= self::SEPARATE_CHARACTER . $currentChar . self::SEPARATE_CHARACTER;
                 } else {
@@ -126,6 +126,29 @@ class EnglishHintController extends Controller
         }
         return $spaceAdded;
     }
+
+    private function getPrevChar($splited, $i)
+    {
+        if($i == 0) {
+            return '';
+        }
+        if($i>=mb_strlen($splited, 'UTF-8')) {
+            return '';
+        }
+        return $splited[$i - 1] ?? '';
+    }
+
+    private function getNextChar($splited, $i)
+    {
+        if($i == 0) {
+            return '';
+        }
+        if($i>=mb_strlen($splited, 'UTF-8')) {
+            return '';
+        }
+        return $splited[$i + 1] ?? '';
+    }
+
 
     private function addSeparateCharacterBetweenConsonant(string $phonetic): string
     {
