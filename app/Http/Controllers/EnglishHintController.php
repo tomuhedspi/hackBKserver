@@ -18,6 +18,7 @@ class EnglishHintController extends Controller
     private $DICT_VOWEL;
     private $DICT_STOP_SOUND;
     private $DICT_VIETNAMESE;
+    private $DICT_ENGLISH_SIMILAR_PRONUNCIATION;
 
     public function __construct()
     {
@@ -35,6 +36,7 @@ class EnglishHintController extends Controller
         $this->DICT_VOWEL = $dictionaries['DICT_VOWEL'];
         $this->DICT_STOP_SOUND = $dictionaries['DICT_STOP_SOUND'];
         $this->DICT_VIETNAMESE = $dictionaries['DICT_VIETNAMESE'];
+        $this->DICT_ENGLISH_SIMILAR_PRONUNCIATION = $dictionaries['DICT_ENGLISH_SIMILAR_PRONUNCIATION'];
     }
 
     public function getPhoneticHints(Request $request)
@@ -50,6 +52,7 @@ class EnglishHintController extends Controller
         $phonetic = $request->reading;
         $phonetic = $this->setSpaceAddBetweenSound($phonetic);
         $sentencesArray = $this->getSentences($phonetic);
+        $sentencesArray = $this->removeSimilarSound($sentencesArray);
         $hint = $this->getVietNameseSentences($sentencesArray);
 
         return response()->json([
@@ -58,6 +61,37 @@ class EnglishHintController extends Controller
         ], 200);
     }
 
+    private function removeSimilarSound(array $sentencesArray): array
+    {
+        $result = [];
+        foreach ($sentencesArray as $sentence) {
+            $result[] = $this->removeSimilarSoundInSentence($sentence);
+        }
+        return $result;
+    }
+
+    private function removeSimilarSoundInSentence(string $sentence): string
+    {
+        $splited = explode(self::SEPARATE_CHARACTER, $sentence);
+        $result = [];
+        foreach ($splited as $currentWord) {
+            if (mb_strlen($currentWord, 'UTF-8') == 0) {
+                continue;
+            }
+            $result[] = $this->removeSimilarSoundInWord($currentWord);
+        }
+        return implode(self::SEPARATE_CHARACTER, $result);
+    }
+
+    private function removeSimilarSoundInWord(string $word): string
+    {
+        $result = $word;
+
+        foreach ($this->DICT_ENGLISH_SIMILAR_PRONUNCIATION as $key => $value) {
+            $result = str_replace((string)$key, (string)$value[0], $result);
+        }
+        return  $result;
+    }
     private function setSpaceAddBetweenSound(string $phonetic): string
     {
         $spaceAdded = $this->replaceUnusedCharacter($phonetic);

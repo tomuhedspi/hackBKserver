@@ -174,6 +174,28 @@ class DictionaryLoader
         return $dictJapaneseVietnamese;
     }
 
+    public function loadEnglishSimilarPronunciationData(): array
+    {
+        $dictEnglishSimilarPronunciation = [];
+        $csvFilePath = resource_path('csv/ENGLISH_SIMILAR_PRONUNCIATION.csv');
+        if (($handle = fopen($csvFilePath, "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                $key = $data[0];
+                $values = array_filter(array_slice($data, 1), function($value) {
+                    return $value !== '';
+                });
+
+                if (isset($dictEnglishSimilarPronunciation[$key])) {
+                    $dictEnglishSimilarPronunciation[$key] = array_merge($dictEnglishSimilarPronunciation[$key], $values);
+                } else {
+                    $dictEnglishSimilarPronunciation[$key] = $values;
+                }
+            }
+            fclose($handle);
+        }
+        return $dictEnglishSimilarPronunciation;
+    }
+
     public function sortByKeyLength(&$array) {
         uksort($array, function($key1, $key2) {
             return mb_strlen($key2, 'UTF-8') - mb_strlen($key1, 'UTF-8');
@@ -206,6 +228,7 @@ class DictionaryLoader
             $dictVowel = $this->loadVowelData();
             $dictStopSound = $this->loadStopSoundData();
             $dictFinalConsonant = $this->loadFinalConsonantData();
+            $dictEnglishSimilarPronunciation = $this->loadEnglishSimilarPronunciationData();
 
             // Sort the dictionaries by key length
             $this->sortByKeyLength($dictVietnamese);
@@ -214,6 +237,7 @@ class DictionaryLoader
             $this->sortByKeyLength($dictVowel);
             $this->sortByKeyLength($dictStopSound);
             $this->sortByKeyLength($dictFinalConsonant);
+            $this->sortByKeyLength($dictEnglishSimilarPronunciation);
 
             return [
                 'DICT_VIETNAMESE' => $dictVietnamese,
@@ -222,6 +246,7 @@ class DictionaryLoader
                 'DICT_VOWEL' => $dictVowel,
                 'DICT_STOP_SOUND' => $dictStopSound,
                 'DICT_FINAL_CONSONANT' => $dictFinalConsonant,
+                'DICT_ENGLISH_SIMILAR_PRONUNCIATION' => $dictEnglishSimilarPronunciation,
             ];
         });
     }
