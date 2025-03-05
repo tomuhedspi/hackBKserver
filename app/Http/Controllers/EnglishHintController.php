@@ -297,23 +297,29 @@ class EnglishHintController extends Controller
             if (mb_strlen($currentChar, 'UTF-8') == 0) {
                 continue;
             }
+            if ($this->isStopSound($currentChar)) {
+                $hintCharacters[] = $this->DICT_STOP_SOUND[$currentChar];
+                continue;
+            }
             if ($this->isVowel($currentChar)) {
                 $hintCharacters[] = $this->DICT_VOWEL[$currentChar];
+                continue;
             } 
             if ($this->isInitialConsonant($currentChar) && $this->isVowel($nextChar)) {
                 $hintCharacters[] = $this->DICT_INITIAL_CONSONANT[$currentChar];
+                continue;
             }
             if ($this->isFinalConsonant($currentChar) && $this->isVowel($prevChar) && !$this->isVowel($nextChar)) {
                 $hintCharacters[] = $this->DICT_FINAL_CONSONANT[$currentChar];
+                continue;
             }
             if ($this->isSingleConsonant($currentChar) && $i == count($splited) - 1) {
                 $hintCharacters[] = $this->DICT_SINGLE_CONSONANT[$currentChar];
+                continue;
             }
             if ($this->isSingleConsonant($currentChar) && $this->isStopSound($prevChar) && $this->isStopSound($nextChar)) {
                 $hintCharacters[] = $this->DICT_SINGLE_CONSONANT[$currentChar];
-            }
-            if ($this->isStopSound($currentChar)) {
-                $hintCharacters[] = $this->DICT_STOP_SOUND[$currentChar];
+                continue;
             }
         }
         return $hintCharacters;
