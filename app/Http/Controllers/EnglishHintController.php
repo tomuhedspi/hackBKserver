@@ -108,7 +108,7 @@ class EnglishHintController extends Controller
         // Remove characters inside square brackets along with the brackets
         $phonetic = preg_replace('/\[.*?\]/', '', $phonetic);
         // Remove other unwanted characters
-        return str_replace(['/', ','], '', $phonetic);
+        return str_replace(['/', ',', 'ː',':'], '', $phonetic);
     }
 
     private function addSeparateCharacterToStopSound(string $phonetic): string
@@ -148,10 +148,10 @@ class EnglishHintController extends Controller
             }
             //nếu phần hiện tại là nguyên âm đơn (vowl) thì thêm dấu cách vào trước và sau
             for ($i = 0; $i < mb_strlen($part, 'UTF-8'); $i++) {
-                $currentChar = mb_substr($part, $i, 1, 'UTF-8');
+                $currentChar = $this->getCurrentChar($part, $i);
                 $prevChar = $this->getPrevChar($part, $i);
                 $nextChar = $this->getNextChar($part, $i);
-                if ($this->isVowel($currentChar) && !$this->isVowel($prevChar) && !$this->isVowel($nextChar)) {
+                if ($this->isVowel($currentChar) && (!$this->isVowel($prevChar)) && (!$this->isVowel($nextChar))) {
                     $spaceAdded .= self::SEPARATE_CHARACTER . $currentChar . self::SEPARATE_CHARACTER;
                 } else {
                     $spaceAdded .= $currentChar;
@@ -160,27 +160,36 @@ class EnglishHintController extends Controller
         }
         return $spaceAdded;
     }
-
-    private function getPrevChar($splited, $i)
+    private function getCurrentChar($part, $i)
     {
-        if($i == 0) {
+        if($i < 0) {
             return '';
         }
-        if($i>=mb_strlen($splited, 'UTF-8')) {
+        if($i>=mb_strlen($part, 'UTF-8')) {
             return '';
         }
-        return $splited[$i - 1] ?? '';
+        return mb_substr($part, $i, 1, 'UTF-8') ?? '';
+    }
+    private function getPrevChar($part, $i)
+    {
+        if($i <= 0) {
+            return '';
+        }
+        if($i>=mb_strlen($part, 'UTF-8')) {
+            return '';
+        }
+        return mb_substr($part, $i-1, 1, 'UTF-8') ?? '';
     }
 
-    private function getNextChar($splited, $i)
+    private function getNextChar($part, $i)
     {
-        if($i == 0) {
+        if($i < 0) {
             return '';
         }
-        if($i>=mb_strlen($splited, 'UTF-8')) {
+        if($i>=mb_strlen($part, 'UTF-8')-1) {
             return '';
         }
-        return $splited[$i + 1] ?? '';
+        return mb_substr($part, $i+1, 1, 'UTF-8') ?? '';
     }
 
 
