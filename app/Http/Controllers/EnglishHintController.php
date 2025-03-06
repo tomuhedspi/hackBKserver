@@ -282,7 +282,11 @@ class EnglishHintController extends Controller
             if (mb_substr($consonantString, -mb_strlen($key, 'UTF-8'), null, 'UTF-8') === $key) {
                 $leftPart = mb_substr($consonantString, 0, -mb_strlen($key, 'UTF-8'), 'UTF-8');
                 $rightPart = $key;
-                return $leftPart . self::WORD_SEPARATE_CHARACTER . $rightPart;
+                if(mb_strlen($leftPart, 'UTF-8')>=1) {
+                    return $leftPart . self::WORD_SEPARATE_CHARACTER . $rightPart;
+                } else {
+                    return  $consonantString;
+                }
             }
         }
         return $consonantString;
