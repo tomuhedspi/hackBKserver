@@ -1,9 +1,9 @@
 ft,t
 kt,t
 lt,n
-ld,n, ɒ
+ld,n, ɒ, dɒ
 lk,n
-lp,n
+lp,n, pɒ
 lb,n
 lf,n
 lv,n
@@ -14,7 +14,7 @@ ls,n
 mp,n
 mf,n
 nt,n
-nd,n
+nd,n, dɒ
 nch,n
 nj,n
 ns,n
@@ -31,7 +31,7 @@ st,t
 ts,t
 ks,t
 bz,t
-dz,t
+dz,t,dɒ
 gz,t
 fs,t
 θs,t
@@ -42,13 +42,13 @@ lz,n
 ŋz,n
 sht,t
 cht,t
-bd,t
-gd,t
-vd,t
-ðd,t
-zd,t
-jd,t
-zhd,t
+bd,t, dɒ
+gd,t, dɒ
+vd,t, dɒ
+ðd,t, dɒ
+zd,t, dɒ
+jd,t, dɒ
+zhd,t, dɒ
 md,n
 ŋd,n
 lkt,n
@@ -57,9 +57,9 @@ lvd,n
 mft,n
 ncht,n
 lcht,n
-njd,n
-ljd,n
-rd,t
+njd,n, dɒ
+ljd,n, dɒ
+rd,t, dɒ
 rt,t
 rk,t
 rb,t
@@ -70,19 +70,19 @@ rθ,t
 rl,n
 rm,n
 rn,n
-rld,n
-rmd,n
-rnd,n
+rld,n, dɒ
+rmd,n, dɒ
+rnd,n, dɒ
 rkt,t
 rst,t
 b,t
-d,t
+d,t, dɒ
 f,t
 g,t
 h,t
 j,t
 k,t
-l,n
+l,ɒ,n
 m,n
 n,n
 ŋ,n
@@ -93,7 +93,7 @@ s,t, sɒ
 t,t
 tʃ,t,t sɒ
 ð,t
-v,t
+v,t, vɒ
 w,t
 z,-
 ʒ,t
@@ -104,7 +104,7 @@ dʒ,t
 ι,n
 ηk,n
 ηg,n
-ηd,n
+ηd,n, dɒ
 ηt,n
 ηθ,n
 ηs,n
@@ -123,7 +123,7 @@ dʒ,t
 ηθtʃ,n,n tʃɒ
 ηθʒ,n
 ηθθ,n
-ηθd,n
+ηθd,n, dɒ
 ηθt,n
 ηθn,n
 ηθl,n
