@@ -24,7 +24,7 @@ be,bé,bế,bẻ,bê,bầy,bẩy,bẫy,bậy,
 bɪ,bị,bia,bí,pin,bịt,,,,
 bɒ,bò,bó,bỏ,bố,bổ,bóc,bốc,bớt,bọc,bọt,bóp
 bʊ,bu, bú, búi, bún, búng,,,,
-baɪ, bãi, bày, bảy, bàn, bán,,,,
+baɪ, bãi, bày, bảy, bàn, bán,bài,bại,bẫy,bậy
 bəʊ,bố,bổ,bơ,bâu,bao,bảo,bão,bào,
 bɔɪ,bói,bồi,bôi,bới,bởi,bơi,,,
 bɪə,bia,bịa,bị,bìa,bí,,,,
@@ -42,7 +42,7 @@ bɒt,bọt,bột,bốc,bớt,bóp,bốt,bợp,,
 bʊt,bút,bụt,bứt,bực,bụp,bú,bù,bụ,bừa
 dʌ,đá,đã,đang,đái,đan,đàn,đần,đăng,
 de,để,đế,đè,đến,đen,dây,giấy,giẫy,dậy
-dɪ,đi,đẻ,để,đè,đe,đinh,đình,đỉnh,đính,đê,đề,đế
+dɪ,đi,đẻ,để,đè,đe,đinh,đình,đỉnh,đính
 dɒ,đo,đò,đỏ,đố,đổ,đó,đồ,đỗ,độ
 dʊ, đu, đủ, đun, đút, đục, đực,,,
 daɪ, đai, đái, đãi, đại,đây,đầy,đẩy,đậy,
@@ -147,7 +147,7 @@ kɒt,cốt,cọp,cóc,cọc,cốc,cót,cột,,
 kʊt,cút,cứt,cụt,cụp,cực,cụ,cú,cứ,cử,củ,cù,cũ
 mʌ,ma,má,mai,mài,mà,mả,mạ,mắt,mất,mát,mập,mặc
 me,mẹ,mé,mê,mây,mấy,mầy,mẻ,mép,mét,mệt
-mɪ,mì,mi,mìn,mịn,mít,mí,Mỹ,mệt,mép
+mɪ,mì,mi,mìn,mịn,mít,mí,Mỹ,
 mɒ,mò,mó,mỏ,mộ,mợ,mõ,mồ,mổ,mơ,mờ,mớ,mở,mợ
 mʊ,mủ,mù,mũ,mụ,múc,mức,mực,múp,mứt,
 maɪ,mai,mài,mải,mái,mãi,may,mày,máy,mấy,mầy
