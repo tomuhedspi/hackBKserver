@@ -46,7 +46,7 @@ class CharController extends Controller
             }
         }
         if ($request->type == Char::ENGLISH && $search) {
-            $chars->where('word', 'like', "%$search%");
+            $chars->where('word', 'like', "$search%");
         }
         if ($request->search_kanji) {
             $search = $request->search_kanji;
@@ -61,6 +61,11 @@ class CharController extends Controller
 
         if ($request->type) {
             $chars->where('type', $request->type);
+        }
+
+        // Add sorting logic here
+        if ($search) {
+            $chars->orderByRaw("CASE WHEN word = ? THEN 0 ELSE 1 END", [$search]);
         }
 
         $response = [
