@@ -46,9 +46,7 @@ class CharController extends Controller
             }
         }
         if ($request->type == Char::ENGLISH && $search) {
-            $chars->where('type', Char::ENGLISH)->where(function ($q) use ($search) {
-                $q->where('word', 'like', "%$search%")->orWhere('meaning', 'like', "%$search%");
-            });
+            $chars->where('word', 'like', "%$search%");
         }
         if ($request->search_kanji) {
             $search = $request->search_kanji;
