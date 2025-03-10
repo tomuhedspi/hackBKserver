@@ -364,6 +364,8 @@ class EnglishHintController extends Controller
             $hintForWord = $this->DICT_VIETNAMESE[$currentWord] ?? null;
             if ($hintForWord) {
                 $vietnameseHint[] = $hintForWord;
+            }else{
+                return [];
             }
         }
         $result = StringUtils::combineStrings($vietnameseHint, self::SEPARATE_CHARACTER);
