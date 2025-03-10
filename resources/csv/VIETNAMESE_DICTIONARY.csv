@@ -227,7 +227,7 @@ rʊn,run,rung,giun,dúng,rụng,rừng,dúm,,
 rʌt,dắt,rất,rát,giật,giặt,rắc,giặc,ra,già,giá,giả,giã
 ret,rét,dẹp,rết,dệt,dè,rẻ,rẽ,dê,dế,dễ
 rɪt,rít,dịt,dịch,dí,dị,gì,rỉ,dịp,
-rɒt,rót,giọt,dột,dốc,rớt,dốt,gió,giọ,giò,rõ,dỗ,dỡ
+rɒt,rót,giọt,dột,dốc,rớt,dốt,gió,giọ,giò,rõ,dỗ,dỡ,dọn,rợn
 rʊt,rút,giúp,giục,dù,rủ,giũ,dụ,dự,giữ
 sʌ,xa,sả,xã,xài,xoay,xoáy,sai,,
 se,sẽ,xệ,xây,sấy,sen,xem,xây,sấy,sẩy
@@ -263,7 +263,7 @@ tʊə,Tour,tú,tớ,tù,thua,thùa,thừa,thưa,,túa,tủa,tu,tủ,tự,từ,t�
 tju,tu,tù,tủ,tự,tú,tụ,tư,tử,từ,tung, túng,tụng,thiu
 tʌn,tan,tán,tắm,tăng,tặng,than,thán,thân,thận,tàn,tằm,tâng,tầng,tang,táng
 ten,tên,tem,thêm,thèm,thềm,têm,,,
-tɪn,tin,tím,tình,tính,thính,thỉnh,thím,tim,tìm
+tɪn,tìm,tin,tím,tình,tính,thính,thỉnh,thím,tim
 tɒn,tóm,tốn,tôm,tồn,thốn,thôn,thông,thơm,tôn,tọng,tông,tâng,tầng
 tʊn,tung,túng,túm,từng,tụng,thùng,thúng,thủng,tùm,
 tʌt,tát,tắt,tất,tập,tạch,tách,thách,thạch,thắt,thật
@@ -428,3 +428,19 @@ seɒ,xéo,xèo,sẹo,xe,xé,sẽ,xê,sệ,
 tʃeɒ,treo,trèo,chéo,chẹo,chèo,che,chè,chê,chế
 θeɒ,theo,thêu,thè,thề,thế,,,,
 veɒ,veo,véo,vèo,vẹo,vé,về,vẽ,,
+au,au,ẩu,âu,ấu,áo,ao,ảo,,
+tau,tau,tàu,tấu,tậu,tạo,táo,,,
+bau,báu,bâu,bầu,bấu,bậu,bao,bào,báo,bảo,bão,bạo
+dau,đau,đâu,đầu,đấu,đậu,đao,đào,đảo,đạo
+fau,phẫu,phao,pháo,,,,,,
+gau,gàu,gâu,gấu,gào,gáo,gạo,,,
+hau,hàu,háu,hầu,hậu,hao,háo,,,
+kau,cau,cáu,quạo,câu,cầu,cấu,cẩu,cậu,cào,cào,cáo,cạo
+mau,mau,màu,máu,mầu,mẩu,mẫu,mào,,
+nau,lau,lâu,lầu,nấu,lẩu,nẫu,lậu,lao,nào,láo,lão,nạo
+pau,báu,bâu,bầu,bấu,bậu,bao,bào,báo,bảo,bão,bạo
+rau,rau,giàu,râu,giầu,rầu,giấu,dẫu,dao,rào
+sau,sau,sáu,sâu,sầu,xấu,sao,xào,xảo,
+tʃau,trâu,chầu,chấu,trẩu,chậu,cháu,chào,cháo,
+θau,thau,thâu,thầu,thấu,tháo,,,,
+vau,vẩu,vào,,,,,,,
