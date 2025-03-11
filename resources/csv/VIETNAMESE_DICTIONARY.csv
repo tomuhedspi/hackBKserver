@@ -43,7 +43,7 @@ bʊt,bút,bụt,bứt,bực,bụp,bú,bù,bụ,bừa
 dʌ,đá,đã,đang,đái,đan,đàn,đần,đăng,
 de,để,đế,đè,đến,đen,dây,giấy,giẫy,dậy
 dɪ,đi,đẻ,để,đè,đe,đinh,đình,đỉnh,đính
-dɒ,đo,đò,đỏ,đố,đổ,đó,đồ,đỗ,độ
+dɒ,đo,đò,đỏ,đố,đổ,đó,đồ,đỗ,độ,đổi,đội,đợi
 dʊ, đu, đủ, đun, đút, đục, đực,,,
 daɪ, đai, đái, đãi, đại,đây,đầy,đẩy,đậy,
 dəʊ, đâu, đấu, đậu,đào,đảo,đạo,,,
@@ -59,11 +59,11 @@ dʊn,đun,đúng,đùm,đùn,đụng,đừng,đứng,đựng,
 dʌt,đặt,đạp,đất,đắp,đáp,đập,đặc,,
 det,đếch,đẹp,đè,đe,đẻ,để,đệ,,
 dɪt,đít, đệt,đích,địch,đi,đì,,,
-dɒt,đốt,đọc,đợt,đớp,đó,đò,đỏ,đồ,đó
+dɒt,đốt,đọc,đợt,đớp,đó,đò,đỏ,đồ,đó,độc,đợi,đội
 dʊt,đút,đứt,đục,đực,đúc,đức,đú,đủ,
 fʌ,phá,pha,phải,phai,phà,phả,phát,phạt,
 fe,phê,phế,phèn,phét,phết,phẩy,,,
-fɪ,phi,phí,phim,phịt,phì,phím,,,
+fɪ,phi,phí,phim,phịt,phì,phím,phích,,
 fɒ,phở,phố,phô,phọt,phởn,phờ,phó,phóng,phòng,phỏng,phồng,phông
 fʊ,phụ,phủi,phun,phục,phủ,phũ,,,
 faɪ,phai,phải,phẩy,phái,pha,phá,phà,phả,
@@ -74,7 +74,7 @@ fʊə,phủ,phở,phũ,phờ,phởn,phụ,phun,phúng,
 fju,phí,phủ,phụ,phi,phì,phị,phũ,,
 fʌn,fan,phắn,phân,phản,phang,pha,phá,phà,phả
 fen,phê,phế,phèn,phen,phềnh,phê,phế,,
-fɪn,phim,phình,phím,phĩnh,phi,phì,phí,,
+fɪn,phim,phình,phím,phĩnh,phi,phì,phí,phích,
 fɒn,phong,phởn,phóng,phồng,phỏng,phông,phố,phô,
 fʊn,phun,phùng,phùn,phúng,phủ,phũ,phụ,,
 fʌt,phạt,phất,fuck,phát,phật,phá,pha,phà,
@@ -139,7 +139,7 @@ kʌn,cần,can,cạn,cân,cắm,câm,cấm,cầm,cam,cám,cắn,căm
 ken,kem,kém,kèn,kén,kèm,kênh,,,
 kɪn,kín,kim,kiêm,kiếm,kìm,kính,kinh,,
 kɒn,con,còn,cơm,cồn,cơn,cốm,cong,cõng,cóng,cọng,cống,cổng
-kʊn,cún,cùn,cúng,cùng,cũng,cụng,,,
+kʊn,cún,cùn,cúng,cùng,cũng,cụng,cứng,cưng,
 kʌt,cát,cắt,cất,cặp,cắp,các,cá,cạ,
 ket,kẹp,két,cây,cầy,cấy,cậy,kết,,
 kɪt,kiss,ký,kỵ,kịch,kích,kịp,kíp,kiệt,
@@ -424,7 +424,7 @@ meɒ,mèo,méo,mẹo,mẹ,mé,mẻ,mê,,
 neɒ,leo,lèo,neo,liệu,liều,né,lẻ,lẹ,
 peɒ,béo,beo,bèo,bẹo,bè,bé,bẻ,bê,bế,bể
 reɒ,reo,réo,dẻo,dè,rẻ,giẽ,dẹo,dê,dế,rể,dễ
-seɒ,xéo,xèo,sẹo,xe,xé,sẽ,xê,sệ,
+seɒ,xéo,xèo,sẹo,xe,xé,sẽ,xê,sệ,siêu
 tʃeɒ,treo,trèo,chéo,chẹo,chèo,che,chè,chê,chế
 θeɒ,theo,thêu,thè,thề,thế,,,,
 veɒ,veo,véo,vèo,vẹo,vé,về,vẽ,,
@@ -444,3 +444,51 @@ sau,sau,sáu,sâu,sầu,xấu,sao,xào,xảo,
 tʃau,trâu,chầu,chấu,trẩu,chậu,cháu,chào,cháo,
 θau,thau,thâu,thầu,thấu,tháo,,,,
 vau,vẩu,vào,,,,,,,
+ə,ở,ợ,ô,ố,ổ,ơn,ớn,ớm,ân,ấn,ấm,ớt
+tə,tớ,tờ,tơ,to,tô,tồ,tố,tổ,tới,tơi,tời,tợp
+bə,bơ,bờ,bở,bơi,bới,bởi,bớt,bậc,bó,bọ,bộ,bồ,bô,bổ
+də,đơ,đờ,đỡ,đời,đợi,đợt,đớp,đó,đỏ,đổ,đố,đồ,đỗ,độ
+fə,phở,phởn,phó,phô,phố,phơi,phớt,phập,
+gə,gờ,gỡ,GIRL,gớm,gờm,gợn,gợt,gấc,gọt,gót,góc
+hə,hơ,hờ,hớ,hơn,hờn,hớt,hợt,hật,hấp,hố,hộ,họ
+kə,cờ,cớ,cỡ,cơn,cơm,cô,cố,cổ,cỗ,cọ,có,cỏ
+mə,mơ,mở,mờ,mớ,mỡ,mợ,mớm,mới,mời,mồ,mổ,mò
+nə,nợ,nở,lỡ,nơ,lời,nới,nơi,nô,lo,nó,nọ,nồi
+pə,bơ,bờ,bở,bơi,bới,bơm,bờm,bò,bô,bồ,bổ
+rə,giơ,giờ,dở,dỡ,rơm,rợn,rơi,rời,
+sə,sờ,sợ,xơi,xới,sợi,so,xô,số,
+tʃə,chờ,chớ,chở,chợ,chơi,trời,chởi,trơn,chôm,chồm
+θə,thơ,thờ,thở,thợ,thời,thơm,thò,thó,thỏ,thô,thồ
+və,vơ,vờ,vớ,vở,vỡ,vợ,vơi,vời,với,vợi,vớt,vợt
+ət,ớt,ấp,ập,ặc,ốp,óc,ộc,ở,ợ,,,
+tət,tập,tất,tật,tợp,tấp,tới,tời,tớ,tờ,tơ
+bət,bớt,bợt,bợp,bập,bật,bắt,bậc,bới,bậc
+dət,đợt,đớp,đợp,đất,đập,đắp,đắt,đặt,đặc
+fət,phớt,phất,phập,phở,phờ,phơi,,,
+gət,gợt,gật,gấp,gập,gắp,gặp,gờ,gỡ,gấc
+hət,hớt,hợt,hất,hật,hấp,hắt,hở,hờ,
+kət,cớt,cất,cấp,cập,cắp,cặp,cắt,,
+mət,mất,mật,mập,mắt,mặt,mắc,mặc,,
+nət,lớp,lợp,nất,lật,nấp,lập,lắp,lặp,lắc,nấc
+pət,bớt,bợt,bợp,bập,bật,bắt,bậc,bới,bậc
+rət,rớt,dớp,rợp,rất,giật,giấc,dập,dắt,giặt
+sət,SEARCH,sập,xấp,sất,sắt,sắc,sặc,,
+tʃət,chớt,chợt,chớp,chất,chật,trật,chấp,chập,
+θət,thớt,thật,thấp,thập,thắp,thắt,,,
+vət,vớt,vợt,vất,vật,vấp,vập,vắt,vặt,
+ən,ơn,ớn,ân,ấn,ẩn,ớm,âm,ấm,ẩm,ẩm
+tən,tớn,tởm,tần,tấn,tẩn,tầm,tẩm,tấm,tâng,tầng
+bən,bơm,bẩn,bẫn,bầm,bấm,bẩm,bòn,bốn,bón,
+dən,đơn,đờn,đờm,đơm,đâm,đầm,đấm,đẫm,đần
+fən,phởn,phân,phần,phấn,phận,phắn,phang,,
+gən,GIRL,gợn,gớm,gờm,gần,gân,gầm,gấm,gặm,gắn
+hən,hơn,hờn,hớn,hân,hận,hâm,hầm,hấng,hắn,hằn
+kən,cơn,cơm,cớm,cân,cần,cấn,câm,cầm,cấm
+mən,mớm,mần,mận,mâm,mầm,mẫm,mắm,mặn,
+nən,lớn,lợn,lần,lấn,lẩn,lầm,nấm,nằm,nắm
+pən,bơm,bẩn,bẫn,bầm,bấm,bẩm,bòn,bốn,bón,
+rən,rợn,rớm,rơm,dần,dẫn,dấn,râm,giẫm,rằm
+sən,sơn,sờn,sớm,sân,sần,sấm,sẫm,săm,sắm,xăng
+tʃən,trơn,trờn,trợn,chớm,chân,trần,chấn,trận,
+θən,thơm,thân,thần,thận,thâm,thầm,thấm,,
+vən,vờn,vần,vấn,vẫn,vâng,vằm,vắng,,
