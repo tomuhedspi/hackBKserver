@@ -12,36 +12,33 @@ use Illuminate\Http\Request;
 
 class CharController extends Controller
 {
-    public function index (Request $request)
+    public function index(Request $request)
     {
         $chars = Char::with('comments.interactive');
         $search = $request->search;
-        if(($request->type == Char::WORD || $request->type == Char::KANJI) && $search){
-            if($this->isJapanese($search)){
+        if (($request->type == Char::WORD || $request->type == Char::KANJI) && $search) {
+            if ($this->isJapanese($search)) {
                 $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
                     $q->where('word', 'like', "%$search%")->orWhere('reading', 'like', "%$search%");
                 });
-            }else{
+            } else {
                 $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
                     $startWithWord = $search . " ";
-                    $endWithWord = " " . $search ;
-                    $exactWord = $search ;
-                    $middleWord = " " .$search . " ";
-                    $commaLeftWord = "," . $search ;
+                    $endWithWord = " " . $search;
+                    $exactWord = $search;
+                    $middleWord = " " . $search . " ";
+                    $commaLeftWord = "," . $search;
                     $commaRightWord = $search . ",";
-                    $bracketLeftWord = "(" . $search ;
+                    $bracketLeftWord = "(" . $search;
                     $bracketRightWord = $search . ")";
                     $q->where('meaning', 'like', "$startWithWord%")
-                    ->orWhere('meaning', 'like', "%$endWithWord")
-                    ->orWhere('meaning', 'like', "$exactWord")
-                    ->orWhere('meaning', 'like', "%$middleWord%")
-                    
-                    ->orwhere('meaning', 'like', "%$commaLeftWord%")
-                    ->orWhere('meaning', 'like', "%$commaRightWord%")
-                    
-                    ->orwhere('meaning', 'like', "%$bracketLeftWord%")
-                    ->orWhere('meaning', 'like', "%$bracketRightWord%")
-                    ;
+                        ->orWhere('meaning', 'like', "%$endWithWord")
+                        ->orWhere('meaning', 'like', "$exactWord")
+                        ->orWhere('meaning', 'like', "%$middleWord%")
+                        ->orWhere('meaning', 'like', "%$commaLeftWord%")
+                        ->orWhere('meaning', 'like', "%$commaRightWord%")
+                        ->orWhere('meaning', 'like', "%$bracketLeftWord%")
+                        ->orWhere('meaning', 'like', "%$bracketRightWord%");
                 });
             }
         }
@@ -66,6 +63,38 @@ class CharController extends Controller
         // Add sorting logic here
         if ($search) {
             $chars->orderByRaw("CASE WHEN word = ? THEN 0 ELSE 1 END", [$search]);
+        }
+
+        $response = [
+            'status' => 200,
+            'data' => new CharCollection($chars->paginate(20))
+        ];
+
+        return response()->json($response, 200);
+    }
+
+    public function exactSearch(Request $request)
+    {
+        $chars = Char::with('comments.interactive');
+        $search = $request->search;
+
+        if ($search) {
+            $chars->where('word', $search);
+        }
+
+        if ($request->search_kanji) {
+            $search = $request->search_kanji;
+            $chars->where('type', Char::KANJI)->where(function ($q) use ($search) {
+                $q->where('word', $search)->orWhere('reading', $search)->orWhere('meaning', $search);
+            });
+        }
+
+        if ($request->book) {
+            $chars->where('book', $request->book);
+        }
+
+        if ($request->type) {
+            $chars->where('type', $request->type);
         }
 
         $response = [
@@ -103,7 +132,7 @@ class CharController extends Controller
         ], 500);
     }
 
-    public function store (Request $request)
+    public function store(Request $request)
     {
         $validator = \Validator::make($request->all(), [
             'word' => 'required|max:255',
@@ -128,7 +157,7 @@ class CharController extends Controller
         ], 500);
     }
 
-    public function books ()
+    public function books()
     {
         $books = Char::whereNotNull('book')->pluck('book')->unique()->values();
         return response()->json([
@@ -137,17 +166,24 @@ class CharController extends Controller
         ], 200);
     }
 
-    public function show ($id, Request $request)
+    public function show($id, Request $request)
     {
         $char = Char::with('comments.interactive')->find($id);
-        if(empty($char->book)){
+        if (empty($char)) {
+            return response()->json([
+                'status' => 404,
+                'data' => []
+            ], 404);
+        }
+
+        if (empty($char->book)) {
             $nextChar = Char::where('id', '>', $id)->where('type', $char->type);
             $prevChar = Char::where('id', '<', $id)->where('type', $char->type)->orderByDesc('id');
-        }else{
+        } else {
             $nextChar = Char::where('id', '>', $id)->where('type', $char->type)->where('book', $char->book);
             $prevChar = Char::where('id', '<', $id)->where('type', $char->type)->where('book', $char->book)->orderByDesc('id');
         }
-       
+
         if ($request->book) {
             $nextChar->where('book', $char->book);
             $prevChar->where('book', $char->book);
@@ -167,7 +203,9 @@ class CharController extends Controller
         }
         return response()->json($response, 200);
     }
-    private function isJapanese($lang) {
+
+    private function isJapanese($lang)
+    {
         return preg_match('/[\x{4E00}-\x{9FBF}\x{3040}-\x{309F}\x{30A0}-\x{30FF}]/u', $lang);
     }
 }
