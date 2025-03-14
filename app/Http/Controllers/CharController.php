@@ -140,6 +140,7 @@ class CharController extends Controller
             'note' => 'required|max:255',
             'book' => 'nullable|max:255',
             'meaning' => 'required|max:255',
+            'created_by' => 'nullable|max:255', // Add validation for created_by
         ]);
 
         if ($validator->fails()) {
