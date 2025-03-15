@@ -64,7 +64,7 @@ dʊt,đút,đứt,đục,đực,đúc,đức,đú,đủ,
 fʌ,phá,pha,phải,phai,phà,phả,phát,phạt,
 fe,phê,phế,phèn,phét,phết,phẩy,,,
 fɪ,phi,phí,phim,phịt,phì,phím,phích,,
-fɒ,phở,phố,phô,phọt,phởn,phờ,phó,phóng,phòng,phỏng,phồng,phông
+fɒ,phở,phố,phô,phọt,phởn,phó,phóng,phòng,phỏng,phồng,phông
 fʊ,phụ,phủi,phun,phục,phủ,phũ,,,
 faɪ,phai,phải,phẩy,phái,pha,phá,phà,phả,
 fəʊ,phẫu,phơi,phở,phao,pháo,phố,,,
@@ -183,7 +183,7 @@ nɪn,nín,lịm,lính,nịnh,linh,lên,nến,nện,
 nɒn,non,lông,lồng,nồng,nón,nom,lởm,lớn,lộn,lợn
 nʊn,lùn,lún,núm,lùm,lụm,lùng,lu,lú,lũ,nụ,lưng
 nʌt,nát,lật,lắp,lấp,lặp,lập,lác,lắc,lạc
-net,nét,lép,nếp,nẹp,nách,lách,lạch,lết,né,lẹ
+net,nét,lép,nếp,nẹp,nách,lách,lạch,lết,né,lẹ,lấy,lậy
 nɪt,lít,lịch,nịt,lép,nẹp,nếp,lết,né,lẹ
 nɒt,lót,lọt,lột,lợp,lốt,lóc,lọc,lớp,lốc,lốp,nấu,lẩu
 nʊt,nút,lụt,lúc,lục,núp,nứt,,,
@@ -210,7 +210,7 @@ pɒt,bớt,bột,bọc,bốc,bóc,bọt,bốt,bóp,
 pʊt,bút,bụt,bực,bức,bục,bứt,bục,,
 rʌ,ra,già,giả,giã,giá,rang,răng,rằng,dặn,dạng,dân,dần
 re,rẻ,rẽ,giẻ,dế,dê,dây,giầy,giẫy,dậy
-rɪ,dí,dì,dị,dìm,rinh,dịch,,,
+rɪ,dí,dì,dị,dìm,rinh,dịch,dịp,rít,giết
 rɒ,do,gió,giỏ,rõ,giơ,dồ,giò,giọ,rổ,giở,dỡ
 rʊ,rủ,ru,dụ,giũ,rút,giục,dù,,
 raɪ,dài,dai,dại,dây,giầy,dậy,giấy,,
@@ -225,8 +225,8 @@ rɪn,rinh,dìm,rình,dính,rim,gì,dí,rỉ,dị
 rɒn,dồn,rốn,dọn,giòn,giọng,giống,giông,rơm,dòm
 rʊn,run,rung,giun,dúng,rụng,rừng,dúm,,
 rʌt,dắt,rất,rát,giật,giặt,rắc,giặc,ra,già,giá,giả,giã
-ret,rét,dẹp,rết,dệt,dè,rẻ,rẽ,dê,dế,dễ
-rɪt,rít,dịt,dịch,dí,dị,gì,rỉ,dịp,
+ret,rét,dép,dẹp,rết,dệt,dè,rẻ,rẽ,dê,dế,dễ
+rɪt,rít,dịt,dịch,dí,dị,gì,rỉ,dịp,giết
 rɒt,rót,giọt,dột,dốc,rớt,dốt,gió,giọ,giò,rõ,dỗ,dỡ,dọn,rợn
 rʊt,rút,giúp,giục,dù,rủ,giũ,dụ,dự,giữ
 sʌ,xa,sả,xã,xài,xoay,xoáy,sai,,
@@ -387,7 +387,7 @@ bəʊn,bâù,bâu,bấu,bốn,bọn,bướm,bón,,,,,
 dəʊn,đầu,đâu,đấu,đậu,đơn,đờm,đón,đòn,
 fəʊn,phông,form,phởn,phồng,,,,,
 gəʊn,gâu,gấu,gợn,gồng,gom,Golf,,,,
-həʊn,hầu,hậu,hôn,hồn,hơn,hờn,hỏng,họng,,,
+həʊn,hầu,hậu,hôn,hồn,hơn,hờn,hỏng,họng,hòm,hôm,
 kəʊn,cầu,câu,cấu,cẩu,cậu,còn,con,cổng,cân,,
 məʊn,mầu,mấu,mẩu,mòn,mông,mong,móng,mớm,,,,
 nəʊn,lầu,lâu,nấu,lẩu,lớn,lợn,nón,nom,
