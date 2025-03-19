@@ -4,7 +4,7 @@ e,ế,em,ép,ếch,ấy,én,ẹp,,
 ɒ,ở,ô,ố,ổ,ôn,ôm,ốm,ộc,
 ʊ,u,ủ,ùn,úng,úp,ú,ụ,ưng,ứng
 aɪ,ai,ái,ải,ấy,,,,,
-əʊ,ẩu,ố,ổ,ợ,ao,áo,ảo,,
+əʊ,ẩu,ố,ổ,ợ,ao,áo,ảo,ôm,ốm,ôn,ổn,ồn
 ɔɪ,ói,ổi,ôi,oi,,,,,
 ɪə,ỉa,ơi,yêu,eo,ổ,ở,ước,ướt,ớt,ướp
 ʊə,úa,ủa,ưa,ùa,,,,,
@@ -382,7 +382,7 @@ tæt,tết,tép,tát,tập,tắc,tạch,tách,thét,thép
 tʃæt,trét,chát,chép,chất,chật,chắp,chặt,,,
 θæt,thét,thép,thắt,thấp,thật,,,,
 væt,vét,vất,vắt,vặt,vật,,,,
-əʊn,ấu,ẩu,ơn,ớn,ươn,ươm,ông,ống,,,
+əʊn,ôm,ốm,ổn,ôn,ồn,ẩu,ơn,ươn,ông,ống,,,
 bəʊn,bâù,bâu,bấu,bốn,bọn,bướm,bón,,,,,
 dəʊn,đầu,đâu,đấu,đậu,đơn,đờm,đón,đòn,
 fəʊn,phông,form,phởn,phồng,,,,,
@@ -444,7 +444,7 @@ sau,sau,sáu,sâu,sầu,xấu,sao,xào,xảo,
 tʃau,trâu,chầu,chấu,trẩu,chậu,cháu,chào,cháo,
 θau,thau,thâu,thầu,thấu,tháo,,,,
 vau,vẩu,vào,,,,,,,
-ə,ở,ợ,ô,ố,ổ,ơn,ớn,ớm,ân,ấn,ấm,ớt
+ə,ở,ợ,ô,ố,ổ,ơn,ớn,ớm,ấn,ấm,ớt,ẩn
 tə,tớ,tờ,tơ,to,tô,tồ,tố,tổ,tới,tơi,tời,tợp
 bə,bơ,bờ,bở,bơi,bới,bởi,bớt,bậc,bó,bọ,bộ,bồ,bô,bổ
 də,đơ,đờ,đỡ,đời,đợi,đợt,đớp,đó,đỏ,đổ,đố,đồ,đỗ,độ
@@ -510,6 +510,6 @@ qɒn,còn,con,cồn,cộn,cơn,cơm,cong,cóng
 qʊn,cùn,cún,cúm,cụm,cùng,cúng,cứng,cưng
 qʌt,quát,quạt,quắt,quất,quật,quá,quạ,quà,qua,quả
 qet,quét,quẹt,què,quẻ,quê,quế
-qɪt,quít,quịt,kích,kịch,kịp,kít
+qɪt,quít,quịt,kích,kịch,kịp
 qɒt,cót,cọp,cốt,cột,cớt,cóc,cọc,cốc,cắt
 qʊt,cút,cụt,cúc,cục,cứt,cực
