@@ -64,7 +64,7 @@ dʊt,đút,đứt,đục,đực,đúc,đức,đú,đủ,
 fʌ,phá,pha,phải,phai,phà,phả,phát,phạt,
 fe,phê,phế,phèn,phét,phết,phẩy,,,
 fɪ,phi,phí,phim,phịt,phì,phím,phích,,
-fɒ,phở,phố,phơi,phọt,phởn,phó,phóng,phòng,phỏng,phồng,phông
+fɒ,phở,phố,phơi,phọt,phởn,phóng,phòng,phồng,phông
 fʊ,phụ,phủi,phun,phục,phủ,phũ,,,
 faɪ,phai,phải,phẩy,phái,pha,phá,phà,phả,
 fəʊ,phẫu,phơi,phở,phao,pháo,phố,,,
@@ -80,7 +80,7 @@ fʊn,phun,phùng,phùn,phúng,phủ,phũ,phụ,,
 fʌt,phạt,phất,fuck,phát,phật,phá,pha,phà,
 fet,phét,phết,phép,phệt,phê,phế,phe,,
 fɪt,phịt,phích,phết,phí,phệt,phét,phép,phế,phê
-fɒt,phốt,phọt,phớt,phò,phố,phô,phở,,
+fɒt,phốt,phọt,phất,phò,phố,phô,phở,phạt,
 fʊt,phút,phụt,phúc,phủ,phũ,phù,phụ,,
 gʌ,gà,gạ,gã,gả,gạt,gặp,ga,gắt,gấp,gập,gạc,gác
 ge,ghé,ghẹ,ghẻ,ghế,gầy,gẩy,gẫy,gậy,
@@ -168,7 +168,7 @@ mɒt,một,móc,mọc,móp,mốc,mót,mốt,mọt,
 mʊt,mút,múc,mục,mứt,mức,mực,múp,,
 nʌ,là,lá,na,lạ,lả,lan,lăn,lần,lấn,lẩn,lẫn
 ne,né,nể,lẹ,nên,nếm,lây,lấy,lầy,lén,nén,nện,lết
-nɪ,ly,ninh,lính,nịnh,lỳ,lý,nín,lịm,lịch,lít,nịt
+nɪ,ly,ninh,lính,nịnh,lỳ,lý,nín,lịm,lịch,lít,liếc,liệt
 nɒ,lo,nổ,no,nó,lỡ,nợ,lò,nỏ,lọ,lộ,lớn,lợn,nón,lố
 nʊ,lú,nụ,lúc,lục,lũ,lùn,lún,lùng,
 naɪ,nay,lái,lại,lạy,nai,lãi,này,lây,lầy,lầy,lẫy,lậy
@@ -279,7 +279,7 @@ tʃʊ,chú,trụ,chút,chụp,trực,,,,
 tʃaɪ,chạy,trải,trái,chảy,chai,chài,trầy,chẩy,
 tʃəʊ,trâu,chầu,chậu,cháu,trao,chào,cháo,chảo,
 tʃɔɪ,chơi,trời,chói,trọi,trôi,,,,
-tʃɪə,chia,chĩa,chìa,chờ,chở,chợ,chuộc,trước,trượt
+tʃɪə,chia,chĩa,chìa,chờ,chở,chợ,chuộc,trước,trượt,trộm
 tʃʊə,trưa,chùa,chú,chua,trụ,,,,
 tʃju,chiều,chịu,chú,chủ,trụ,chiếu,triệu,,
 tʃʌn,chân,chán,chạn,chắn,chặn,chậm,chấm,,
@@ -320,7 +320,7 @@ vɒ,vỏ,võ,vỗ,vô,vò,vơ,vồ,vờ,vớ,vở,vỡ,vợ
 vʊ,vú,vừa,vùi,vui,vụ,vựa,vút,vụt,vứt
 vaɪ,vay,vài,vái,vải,vai,vãi,vại,,
 vəʊ,vây,vâu,vẫy,vẩy,vơ,vợ,vào,vầy,vờ,vớ
-vɔɪ,voi,vòi,vội,vời,vơi,vôi,với,vợi,
+vɔɪ,voi,vòi,vội,vời,vơi,vôi,với,vợi,vậy,vật,vặt,vất
 vɪə,vía,vỉa,vơ,vợ,vờ,vớ,vở,vỡ,vuốt,vượt
 vʊə,vua,vừa,vựa,vờ,vớ,vở,vỡ
 vju,víu,vú,vụ,vì,ví,vỉ,vị,,
@@ -448,7 +448,7 @@ vau,vẩu,vào,,,,,,,
 tə,tớ,tờ,tơ,to,tô,tồ,tố,tổ,tới,tơi,tời,tợp
 bə,bơ,bờ,bở,bơi,bới,bởi,bớt,bậc,bó,bọ,bộ,bồ,bô,bổ
 də,đơ,đờ,đỡ,đời,đợi,đợt,đớp,đó,đỏ,đổ,đố,đồ,đỗ,độ
-fə,phở,phởn,phó,phô,phố,phơi,phớt,phập,
+fə,phở,phởn,phô,phố,phơi,phập,
 gə,gờ,gỡ,GIRL,gớm,gờm,gợn,gợt,gấc,gọt,gót,góc
 hə,hơ,hờ,hớ,hơn,hờn,hớt,hợt,hật,hấp,hố,hộ,họ
 kə,cờ,cớ,cỡ,cơn,cơm,cô,cố,cổ,cỗ,cọ,có,cỏ
@@ -457,14 +457,14 @@ nə,nợ,nở,lỡ,nơ,lời,nới,nơi,nô,lo,nó,nọ,nồi
 pə,bơ,bờ,bở,bơi,bới,bơm,bờm,bò,bô,bồ,bổ
 rə,giơ,giờ,dở,dỡ,rơm,rợn,rơi,rời,
 sə,sờ,sợ,xơi,xới,sợi,so,xô,số,
-tʃə,chờ,chớ,chở,chợ,chơi,trời,chởi,trơn,chôm,chồm
+tʃə,chờ,chỗ,chở,chợ,chơi,trời,chởi,trơn,trộm,chồm,trơn,trợn
 θə,thơ,thờ,thở,thợ,thời,thơm,thò,thó,thỏ,thô,thồ
-və,vơ,vờ,vớ,vở,vỡ,vợ,vơi,vời,với,vợi,vớt,vợt
+və,vơ,vờ,vớ,vở,vỡ,vợ,vơi,vời,với,vợi,vớt,vợt,vật,vặt,vất,vậy
 ət,ớt,ấp,ập,ặc,ốp,óc,ộc,ở,ợ,,,
 tət,tập,tất,tật,tợp,tấp,tới,tời,tớ,tờ,tơ
 bət,bớt,bợt,bợp,bập,bật,bắt,bậc,bới,bậc
 dət,đợt,đớp,đợp,đất,đập,đắp,đắt,đặt,đặc
-fət,phớt,phất,phập,phở,phờ,phơi,,,
+fət,phọt,phất,phập,phở,phờ,phơi,phạt,,
 gət,gợt,gật,gấp,gập,gắp,gặp,gờ,gỡ,gấc,gọi,gội
 hət,hớt,hợt,hất,hật,hấp,hắt,hở,hờ,
 kət,cớt,cất,cấp,cập,cắp,cặp,cắt,,
