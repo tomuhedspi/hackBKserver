@@ -271,7 +271,7 @@ tet,Tết,tép,té,tệ,thét,thép,,tè,tẻ,tẽ,tê,tế,tệp
 tɪt,tít,thịt,tích,Tết,thít,thích,tệp,típ,
 tɒt,tốt,TOP,tọt,tợp,thóc,thọc,thốt,thớt,thóp,tóc,tộc
 tʊt,tức,tụt,thúc,thức,thực,thụt,tù,tú,tủ,tụ,tự,từ,
-tʃʌ,cha,chà,trả,chai,chảy,chặn,,,
+tʃʌ,cha,chà,trả,chai,chảy,chặn,chán,chắn,trắng,cháy,chạy
 tʃe,che,chê,chè,chế,trên,chém,chầy,chấy,chẩy
 tʃɪ,chỉ,chi,trĩ,trị,chim,chìm,chính,,
 tʃɒ,cho,trò,chỗ,chợ,trọ,chó,chở,,
@@ -287,7 +287,7 @@ tʃen,trên,chiên,chiến,chuyện,chiếm,,,,
 tʃɪn,chim,chìm,chín,chính,chỉnh,,,,
 tʃɒn,chọn,tròn,chôn,trốn,trộm,trộn,,,
 tʃʊn,chung,trùng,trúng,chum,,,,,
-tʃʌt,chat,chắt,chất,chặt,trật,,,,
+tʃʌt,chat,trách,chất,chặt,trật,chắc,,,
 tʃet,chết,chệch,chẹt,chếch,chép,,,,
 tʃɪt,chích,chịch,chết,chệch,chip,chép,chếch,,
 tʃɒt,trót,chốt,chọc,chợt,chộp,chớp,chó,trọ,trò
@@ -347,7 +347,7 @@ pæ,pa,bế,bắt,bạc,bếp,bẹp,,,
 ræ,ra,giá,giả,giã,rẻ,rẽ,dễ,dế,
 sæ,xa,xả,xã,xe,xem,xây,sấy,sậy,
 tæ,ta,tả,tã,tạ,tè,té,tan,tàn,tán,tha,thà,thè,thề,thế
-tʃæ,cha,trả,che,chê,chè,chế,chém,chầy,
+tʃæ,cha,trả,che,chê,chè,chế,chém,chầy,chán,chắn,trắng,cháy,chạy
 θæ,tha,thà,thè,thẻ,thề,thèm,thành,thả,
 væ,và,va,vã,ve,vé,vẻ,vây,vậy,
 æn,ăn,em,êm,én,ẵm,âm,,,
@@ -363,7 +363,7 @@ pæn,bạn,bàn,bán,bên,bến,bênh,bệnh,,
 ræn,rán,rang,dặn,giận,rên,rèn,rèm,rén,rắn,giảng,dạng,,
 sæn,sang,sáng,sắm,sen,xén,xám,xem,xẻng,
 tæn,tán,tan,tẩn,tên,tàn,thèm,thêm,,
-tʃæn,tràn,chan,chán,chèn,chén,trên,tràn,chân,chắn,
+tʃæn,tràn,chan,chán,chèn,chén,trên,tràn,chân,chắn,trắng
 θæn,than,tham,thăm,thấm,thẹn,thèm,thêm,thành,thánh,,,
 væn,van,vàng,váng,vẫn,ven,vênh,vặn,vắn,,,,
 æt,ác,ép,ếch,ấp,ập,ặc,áp,,
@@ -449,7 +449,7 @@ tə,tớ,tờ,tơ,to,tô,tồ,tố,tổ,tới,tơi,tời,tợp
 bə,bơ,bờ,bở,bơi,bới,bởi,bớt,bậc,bó,bọ,bộ,bồ,bô,bổ
 də,đơ,đờ,đỡ,đời,đợi,đợt,đớp,đó,đỏ,đổ,đố,đồ,đỗ,độ
 fə,phở,phởn,phô,phố,phơi,phập,
-gə,gờ,gỡ,GIRL,gớm,gờm,gợn,gợt,gấc,gọt,gót,góc
+gə,gờ,gỡ,gộp,GIRL,gớm,gờm,gợn,gợt,gấc,gọt,gót,góc
 hə,hơ,hờ,hớ,hơn,hờn,hớt,hợt,hật,hấp,hố,hộ,họ
 kə,cờ,cớ,cỡ,cơn,cơm,cô,cố,cổ,cỗ,cọ,có,cỏ
 mə,mỗi,mơ,mở,mờ,mớ,mỡ,mợ,mớm,mới,mời,mồ,mổ,mò,mồm
@@ -465,7 +465,7 @@ tət,tập,tất,tật,tợp,tấp,tới,tớ,tốt,TOP,tơ
 bət,bớt,bợt,bợp,bập,bật,bắt,bậc,bới,bậc,bóp,bóc,bọc,bốc
 dət,đợt,đớp,đất,đập,đắp,đắt,đặt,đặc,đọc,độc,đốt
 fət,phọt,phất,phập,phở,phờ,phơi,phạt,phố,
-gət,gợt,gật,gấp,gập,gắp,gặp,gờ,gỡ,gấc,gọi,gội,gọt,góp,gộp,góc,gốc
+gət,gộp,gợt,gật,gấp,gập,gắp,gặp,gờ,gỡ,gấc,gọi,gội,gọt,góp,góc,gốc
 hət,hớt,hợt,hất,hật,hấp,hắt,hở,hờ,hót,hóc,học,hộp,họp
 kət,cớt,cất,cấp,cập,cắp,cặp,cắt,cột,cốc,cọc,cóc
 mət,mất,mật,mập,mắt,mặt,mắc,mặc,một,mọt,mốc,mọc,móc
