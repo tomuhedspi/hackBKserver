@@ -428,7 +428,7 @@ seɒ,xéo,xèo,sẹo,xe,xé,sẽ,xê,sệ,siêu
 tʃeɒ,treo,trèo,chéo,chẹo,chèo,che,chè,chê,chế
 θeɒ,theo,thêu,thè,thề,thế,,,,
 veɒ,veo,véo,vèo,vẹo,vé,về,vẽ,,
-au,au,ẩu,âu,ấu,áo,ao,ảo,,
+au,ẩu,ấu,áo,ao,ảo,,
 tau,tau,tàu,tấu,tậu,tạo,táo,,,
 bau,báu,bâu,bầu,bấu,bậu,bao,bào,báo,bảo,bão,bạo
 dau,đau,đâu,đầu,đấu,đậu,đao,đào,đảo,đạo
@@ -461,21 +461,21 @@ tʃə,chờ,chỗ,chở,chợ,chơi,trời,chởi,trơn,trộm,chồm,trơn,tr�
 θə,thơ,thờ,thở,thợ,thời,thơm,thò,thó,thỏ,thô,thồ
 və,vơ,vờ,vớ,vở,vỡ,vợ,vơi,vời,với,vợi,vớt,vợt,vật,vặt,vất,vậy
 ət,ớt,ấp,ập,ặc,ốp,óc,ộc,ở,ợ,,,
-tət,tập,tất,tật,tợp,tấp,tới,tời,tớ,tờ,tơ
-bət,bớt,bợt,bợp,bập,bật,bắt,bậc,bới,bậc
-dət,đợt,đớp,đợp,đất,đập,đắp,đắt,đặt,đặc
-fət,phọt,phất,phập,phở,phờ,phơi,phạt,,
-gət,gợt,gật,gấp,gập,gắp,gặp,gờ,gỡ,gấc,gọi,gội
-hət,hớt,hợt,hất,hật,hấp,hắt,hở,hờ,
-kət,cớt,cất,cấp,cập,cắp,cặp,cắt,,
-mət,mất,mật,mập,mắt,mặt,mắc,mặc,,
-nət,lớp,lợp,nất,lật,nấp,lập,lắp,lặp,lắc,nấc
-pət,bớt,bợt,bợp,bập,bật,bắt,bậc,bới,bậc
-rət,rớt,dớp,rợp,rất,giật,giấc,dập,dắt,giặt
-sət,SEARCH,sập,xấp,sất,sắt,sắc,sặc,,
-tʃət,chớt,chợt,chớp,chất,chật,trật,chấp,chập,
-θət,thớt,thật,thấp,thập,thắp,thắt,,,
-vət,vớt,vợt,vất,vật,vấp,vập,vắt,vặt,
+tət,tập,tất,tật,tợp,tấp,tới,tớ,tốt,TOP,tơ
+bət,bớt,bợt,bợp,bập,bật,bắt,bậc,bới,bậc,bóp,bóc,bọc,bốc
+dət,đợt,đớp,đất,đập,đắp,đắt,đặt,đặc,đọc,độc,đốt
+fət,phọt,phất,phập,phở,phờ,phơi,phạt,phố,
+gət,gợt,gật,gấp,gập,gắp,gặp,gờ,gỡ,gấc,gọi,gội,gọt,góp,gộp,góc,gốc
+hət,hớt,hợt,hất,hật,hấp,hắt,hở,hờ,hót,hóc,học,hộp,họp
+kət,cớt,cất,cấp,cập,cắp,cặp,cắt,cột,cốc,cọc,cóc
+mət,mất,mật,mập,mắt,mặt,mắc,mặc,một,mọt,mốc,mọc,móc
+nət,lớp,lợp,lót,lật,nấp,lập,lắp,lặp,lắc,nấc,lọt,lột,lốc
+pət,bớt,bợt,bợp,bập,bật,bắt,bậc,bới,bậc,bóc,bọc,bốc,bột
+rət,rớt,dớp,rợp,rất,giật,giấc,dập,dắt,giặt,rót,dốt
+sət,sập,xấp,sốc,sốt,xót,sọt,sất,sắt,sắc,sặc,xóc,shop
+tʃət,chớt,chợt,chớp,chất,chật,trật,chấp,chập,chốt,chộp,chột,trót
+θət,thớt,thật,thấp,thập,thắp,thắt,thọt,thóc,thọc
+vət,vớt,vợt,vất,vật,vấp,vập,vắt,vặt,vọt,vốc
 ən,ơn,ớn,ân,ấn,ẩn,ớm,âm,ấm,ẩm,ẩm
 tən,tôm,tởm,tần,tấn,tẩn,tầm,tẩm,tấm,tận,tầng
 bən,bơm,bẩn,bẫn,bầm,bấm,bẩm,bòn,bốn,bón,
@@ -504,12 +504,12 @@ qɪə,quơ,kia,kìa,quất,quật,cuốc,cuộc,cược,cước,cưới
 qʊə,cua,của,cưa,cứa,cửa,cựa,quất,quật
 qju,quỳ,quý,qủy,quỹ,quỵ
 qʌn,quan,quán,quản,quần,quấn,quẩn,quận
-qen,quen,quèn,quên
+qen,quen,quèn,quên,quyền,quyện
 qɪn,quýnh,quỳ,quý,quỷ,quỵ,quỹ,quỳnh,
 qɒn,còn,con,cồn,cộn,cơn,cơm,cong,cóng
 qʊn,cùn,cún,cúm,cụm,cùng,cúng,cứng,cưng
 qʌt,quát,quạt,quắt,quất,quật,quá,quạ,quà,qua,quả
 qet,quét,quẹt,què,quẻ,quê,quế
-qɪt,quít,quịt,kích,kịch,kịp
+qɪt,quít,quịt,kích,kịch,kịp,quyết
 qɒt,cót,cọp,cốt,cột,cớt,cóc,cọc,cốc,cắt
 qʊt,cút,cụt,cúc,cục,cứt,cực
