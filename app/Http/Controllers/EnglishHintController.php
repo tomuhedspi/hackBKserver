@@ -12,6 +12,7 @@ class EnglishHintController extends Controller
     private $dictionaryLoader;
     private const SEPARATE_CHARACTER = ' ';
     private const WORD_SEPARATE_CHARACTER = ' - ';
+    private const MAX_LENGTH_HINT = 1800;
     private $DICT_FINAL_CONSONANT;
     private $DICT_INITIAL_CONSONANT;
     private $DICT_SINGLE_CONSONANT;
@@ -341,13 +342,40 @@ class EnglishHintController extends Controller
     private function getVietNameseSentences(array $sentencesArray): array
     {
         $result = [];
+
         foreach ($sentencesArray as $sentence) {
+            $possibleAddingNewSentencesCount = $this->getPossibleCountOfAddingNewSentences($result);
             $hintSentences = $this->convertEnglishSentenceToVietnamese($sentence);
+            if (count($hintSentences) > $possibleAddingNewSentencesCount) {
+                $hintSentences = array_slice($hintSentences, 0, $possibleAddingNewSentencesCount);
+            }
             $result[] = $hintSentences;
         }
         return $result;
     }
 
+    private function getPossibleCountOfAddingNewSentences(array $array): int
+    {
+        $result = 0;
+        $countArrayElements = $this->countArrayElements($array);
+        if( (self::MAX_LENGTH_HINT - $countArrayElements) > 0) {
+            $result = self::MAX_LENGTH_HINT - $countArrayElements;
+        }
+        return $result;
+    }
+
+    private function countArrayElements(array $array): int
+    {
+        $result = 0;
+        foreach ($array as $subArray) {
+            if (is_array($subArray)) {
+                $result += count($subArray);
+            } else {
+                $result++;
+            }
+        }
+        return $result;
+    }
     private function convertEnglishSentenceToVietnamese(string $englishSentence): array
     {
         $vietnameseHint = [];
@@ -368,7 +396,71 @@ class EnglishHintController extends Controller
                 return [];
             }
         }
+        $vietnameseHint = $this->cutArrayToLimitLength($vietnameseHint);
         $result = StringUtils::combineStrings($vietnameseHint, self::SEPARATE_CHARACTER);
+        return $result;
+    }
+
+    private function cutArrayToLimitLength(array $dataArray): array
+    {
+        $result = [];
+        $newSize = [];
+
+        $newSize = $this->getNewSize($dataArray);
+        $result = $this->cutArrayBySize($dataArray, $newSize);
+
+        return $result;
+    }
+
+    private function cutArrayBySize(array $dataArray, array $sizeArray): array 
+    {
+        $result = [];
+
+        if (count($dataArray) !== count($sizeArray)) {
+            return $dataArray;
+        }
+        
+        foreach ($dataArray as $index => $subArray) {
+            $newSize = $sizeArray[$index] ?? 1; 
+            $result[] = array_slice($subArray, 0, max(0, $newSize));
+        }
+        
+        return $result;
+    }
+    private function getNewSize(array $array): array
+    {
+        $result = $this->setDefaultSizeForArray($array);
+
+        for($i = 0; $i < count($result); $i++) {
+            $productOfOtherElements= $this->getProductOfArrayElementsExceptPosition($result,$i);
+            $newLength = intdiv( self::MAX_LENGTH_HINT,$productOfOtherElements);
+            $possibleLength =  count($array[$i]);
+
+            $result[$i] = min($newLength,$possibleLength);
+        }
+        return $result;
+    }
+
+    private function getProductOfArrayElementsExceptPosition(array $array, int $position): int
+    {
+        $result = 1;
+        for($i = 0; $i < count($array); $i++) {
+            if($i!=$position){
+                $result=$result*$array[$i];
+            }
+        }
+        return $result;
+    }
+
+
+    private function setDefaultSizeForArray(array $array): array
+    {
+        $result = [];
+        $dadLength = count($array);
+        $lengthNewChild = intval(pow(self::MAX_LENGTH_HINT, 1 / max(1, $dadLength)));
+        for ($i = 0; $i < $dadLength; $i++) {
+            $result[$i] = $lengthNewChild;
+        }
         return $result;
     }
 
