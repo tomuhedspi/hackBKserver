@@ -205,6 +205,92 @@ class CharController extends Controller
         return response()->json($response, 200);
     }
 
+    public function radicalsTree($id)
+    {
+        $visited = [];
+        $edges = [];
+        $nodes = [];
+        $maxDepth = 10;
+
+        $char = Char::find($id);
+        if (!$char) {
+            return response()->json([
+                'status' => 404,
+                'message' => 'Char not found'
+            ], 404);
+        }
+
+        $edgeSet = [];
+        $this->buildRadicalsTreeById($char, $edges, $nodes, $visited, 0, $maxDepth, $negativeId, $edgeSet);
+
+        return response()->json([
+            'nodes' => array_values($nodes),
+            'links' => $edges
+        ]);
+    }
+
+    private function buildRadicalsTreeById($char, &$edges, &$nodes, &$visited, $depth, $maxDepth, &$negativeId = 0, &$edgeSet = [])
+    {
+        if ($depth > $maxDepth) return;
+        if (isset($visited[$char->id])) return;
+        $visited[$char->id] = true;
+
+        // Thêm node nếu chưa có
+        if (!isset($nodes[$char->id])) {
+            $nodes[$char->id] = [
+                'id' => (string)$char->id,
+                'label' => $char->word,
+                'note' => $char->note
+            ];
+        }
+
+        if (!$char->child) return;
+
+        $length = mb_strlen($char->child, 'UTF-8');
+        for ($i = 0; $i < $length; $i++) {
+            $childWord = mb_substr($char->child, $i, 1, 'UTF-8');
+            if ($childWord === '') continue;
+            $childChar = Char::where('word', $childWord)->first();
+
+            if ($childChar) {
+                if (!isset($nodes[$childChar->id])) {
+                    $nodes[$childChar->id] = [
+                        'id' => (string)$childChar->id,
+                        'label' => $childChar->word,
+                        'note' => $childChar->note
+                    ];
+                }
+                $edgeKey = (string)$char->id . '-' . (string)$childChar->id;
+                if (!isset($edgeSet[$edgeKey])) {
+                    $edges[] = [
+                        'source' => (string)$char->id,
+                        'target' => (string)$childChar->id
+                    ];
+                    $edgeSet[$edgeKey] = true;
+                }
+                $this->buildRadicalsTreeById($childChar, $edges, $nodes, $visited, $depth + 1, $maxDepth, $negativeId, $edgeSet);
+            } else {
+                $negativeId = intval($negativeId) - 1;
+                $virtualId = (string)$negativeId;
+                if (!isset($nodes[$virtualId])) {
+                    $nodes[$virtualId] = [
+                        'id' => $virtualId,
+                        'label' => $childWord,
+                        'note' => ''
+                    ];
+                }
+                $edgeKey = (string)$char->id . '-' . $virtualId;
+                if (!isset($edgeSet[$edgeKey])) {
+                    $edges[] = [
+                        'source' => (string)$char->id,
+                        'target' => $virtualId
+                    ];
+                    $edgeSet[$edgeKey] = true;
+                }
+            }
+        }
+    }
+
     private function isJapanese($lang)
     {
         return preg_match('/[\x{4E00}-\x{9FBF}\x{3040}-\x{309F}\x{30A0}-\x{30FF}]/u', $lang);
