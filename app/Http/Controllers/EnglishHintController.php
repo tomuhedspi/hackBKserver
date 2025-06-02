@@ -12,7 +12,7 @@ class EnglishHintController extends Controller
     private $dictionaryLoader;
     private const SEPARATE_CHARACTER = ' ';
     private const WORD_SEPARATE_CHARACTER = ' - ';
-    private const MAX_LENGTH_HINT = 1800;
+    private const MAX_LENGTH_HINT = 1000;
     private $DICT_FINAL_CONSONANT;
     private $DICT_INITIAL_CONSONANT;
     private $DICT_SINGLE_CONSONANT;

@@ -13,6 +13,7 @@ class JapaneseHintController extends Controller
     private const SECOND_WORD_SEPARATE_CHARACTER = '- ';
     private $DICT_JAPANESE_VIETNAMESE;
     private $DICT_JAPANESE_SIMILAR_PRONUNCIATION;
+    private const MAX_LENGTH_HINT = 1000;
 
     public function __construct()
     {
@@ -52,6 +53,7 @@ class JapaneseHintController extends Controller
     {
         $smallPartsArray = $this->getVietNamesePart($phonetic);
         $wordsArray = StringUtils::combineStrings($smallPartsArray,self::SEPARATE_CHARACTER);
+        $wordsArray = array_slice($wordsArray, 0, self::MAX_LENGTH_HINT);
         return $wordsArray;
     }
 
