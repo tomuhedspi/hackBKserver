@@ -240,7 +240,9 @@ class CharController extends Controller
             $nodes[$char->id] = [
                 'id' => (string)$char->id,
                 'label' => $char->word,
-                'note' => $char->note
+                'note' => $char->note,
+                'reading' => $char->reading,
+                'meaning' => $char->meaning
             ];
         }
 
@@ -259,7 +261,9 @@ class CharController extends Controller
                     $nodes[$childChar->id] = [
                         'id' => (string)$childChar->id,
                         'label' => $childChar->word,
-                        'note' => $childChar->note
+                        'note' => $childChar->note,
+                        'reading' => $childChar->reading,
+                        'meaning' => $childChar->meaning
                     ];
                 }
                 $edgeKey = (string)$char->id . '-' . (string)$childChar->id;
@@ -278,7 +282,9 @@ class CharController extends Controller
                     $nodes[$virtualId] = [
                         'id' => $virtualId,
                         'label' => $childWord,
-                        'note' => ''
+                        'note' => '',
+                        'reading' => '',
+                        'meaning' => ''
                     ];
                 }
                 $edgeKey = (string)$char->id . '-' . $virtualId;
