@@ -253,7 +253,7 @@ class CharController extends Controller
         for ($i = 0; $i < $length; $i++) {
             $childWord = mb_substr($char->child, $i, 1, 'UTF-8');
             if ($childWord === '') continue;
-            $childChar = Char::where('word', $childWord)
+            $childChar = Char::whereRaw("BINARY `word` = ?", [$childWord])
                 ->where('type', Char::KANJI)
                 ->first();
 
