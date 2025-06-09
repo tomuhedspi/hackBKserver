@@ -322,6 +322,7 @@ class CharController extends Controller
 
     private function isJapanese($lang)
     {
-        return preg_match('/[\x{4E00}-\x{9FBF}\x{3040}-\x{309F}\x{30A0}-\x{30FF}]/u', $lang);
+        // Bao gồm Kanji, Kanji mở rộng, Hiragana, Katakana, và các bộ thủ đặc biệt
+        return preg_match('/[\x{4E00}-\x{9FFF}\x{3400}-\x{4DBF}\x{20000}-\x{2A6DF}\x{2A700}-\x{2B73F}\x{2B740}-\x{2B81F}\x{2B820}-\x{2CEAF}\x{F900}-\x{FAFF}\x{2F800}-\x{2FA1F}\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{3021}\x{2E88}\x{2E84}]/u', $lang);
     }
 }
