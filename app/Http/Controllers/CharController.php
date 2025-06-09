@@ -48,16 +48,20 @@ class CharController extends Controller
         if ($request->search_kanji) {
             $search = $request->search_kanji;
             if ($this->isJapanese($search)) {
-                // Tách từng ký tự tiếng Nhật và tìm kiếm chính xác trên trường word
                 $charsArr = [];
                 $length = mb_strlen($search, 'UTF-8');
                 for ($i = 0; $i < $length; $i++) {
                     $charsArr[] = mb_substr($search, $i, 1, 'UTF-8');
                 }
-                // Chỉ lấy tối đa 20 ký tự đầu tiên
                 $charsArr = array_slice($charsArr, 0, 20);
+
+                // Tạo chuỗi truy vấn BINARY cho từng ký tự
                 $chars->where('type', Char::KANJI)
-                      ->whereIn('word', $charsArr);
+                    ->where(function ($q) use ($charsArr) {
+                        foreach ($charsArr as $char) {
+                            $q->orWhereRaw("BINARY `word` = ?", [$char]);
+                        }
+                    });
             } else {
                 // Logic cũ, bỏ tìm kiếm ở trường word
                 $chars->where('type', Char::KANJI)
