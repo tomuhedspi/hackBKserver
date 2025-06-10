@@ -320,24 +320,48 @@ class CharController extends Controller
         }
     }
 
-    private function isJapanese($lang)
-    {
-        return preg_match('/['
-            . '\x{4E00}-\x{9FFF}'      // Kanji cơ bản
-            . '\x{3400}-\x{4DBF}'      // Kanji mở rộng A
-            . '\x{20000}-\x{2A6DF}'    // Kanji mở rộng B
-            . '\x{2A700}-\x{2B73F}'    // Kanji mở rộng C
-            . '\x{2B740}-\x{2B81F}'    // Kanji mở rộng D
-            . '\x{2B820}-\x{2CEAF}'    // Kanji mở rộng E
-            . '\x{F900}-\x{FAFF}'      // Kanji tương thích
-            . '\x{2F800}-\x{2FA1F}'    // Kanji bổ sung
-            . '\x{3040}-\x{309F}'      // Hiragana
-            . '\x{30A0}-\x{30FF}'      // Katakana
-            . '\x{3021}'               // 〡 (Hàng Châu số 1)
-            . '\x{2E88}\x{2E84}'       // ⺈ (U+2E88), ⺄ (U+2E84)
-            . '\x{2EBC}\x{2ED6}'       // ⺼ (U+2EBC), ⻖ (U+2ED6)
-            . '\x{2E97}\x{2E8C}'       // ⺗ (U+2E97), ⺌ (U+2E8C) <-- ĐÃ SỬA TỪ 2ECC → 2E8C
-            . '\x{2ED7}\x{2E95}'       // ⻗ (U+2ED7), ⺕ (U+2E95)
-            . ']/u', $lang);
-    }
+private function isJapanese($lang)
+{
+    return preg_match('/['
+        // Kanji tiêu chuẩn và mở rộng
+        . '\x{4E00}-\x{9FFF}\x{3400}-\x{4DBF}\x{20000}-\x{2A6DF}\x{2A700}-\x{2B73F}\x{2B740}-\x{2B81F}\x{2B820}-\x{2CEAF}'
+        
+        // Kanji tương thích và bổ sung
+        . '\x{F900}-\x{FAFF}\x{2F800}-\x{2FA1F}'
+        
+        // Hiragana/Katakana/Katakana Phonetic Extensions
+        . '\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{31F0}-\x{31FF}'
+        
+        // Bộ thủ CJK (⺈⺄⺼⻖⺗⺌⻗⺕...)
+        . '\x{2E80}-\x{2EFF}\x{2F00}-\x{2FDF}'
+        
+        // Ký tự số/ký hiệu tiếng Nhật
+        . '\x{3000}-\x{303F}\x{3021}\x{30A0}\x{30FB}'
+        
+        // Các ký tự đặc biệt khác
+        . '\x{4DC0}-\x{4DFF}'  // Hexagram symbols
+        . '\x{3190}-\x{319F}'  // Kanbun
+        
+        // Các ký tự riêng lẻ quan trọng
+        . '\x{9FB7}'  // 龷
+        . '\x{706C}'  // 灬
+        . '\x{200A4}' // 𠂤
+        . '\x{27607}' // 𧘇
+        . '\x{4E28}'  // 丨
+        . '\x{5EFF}'  // 廿
+        . '\x{5F00}'  // 开
+        . '\x{9FBC}'  // 龼
+        . '\x{9FCD}'  // 龍
+        . '\x{9FD5}'  // 龕
+        . '\x{2EBE}'  // ⺾
+        . '\x{2ECF}'  // ⻏
+        . '\x{2ED8}'  // ⻘
+        . '\x{2EE0}'  // ⻠
+        
+        // Bổ sung thêm các ký tự đặc biệt khác từ danh sách của bạn
+        . '\x{20BB7}' // 𠮷
+        . '\x{2A6D6}' // 𪛖
+        . '\x{2B740}' // 𫝀
+        . ']/u', $lang);
+}
 }
