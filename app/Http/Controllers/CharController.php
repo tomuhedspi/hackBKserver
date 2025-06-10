@@ -322,7 +322,22 @@ class CharController extends Controller
 
     private function isJapanese($lang)
     {
-        // Bao gồm Kanji, Kanji mở rộng, Hiragana, Katakana, và các bộ thủ đặc biệt
-        return preg_match('/[\x{4E00}-\x{9FFF}\x{3400}-\x{4DBF}\x{20000}-\x{2A6DF}\x{2A700}-\x{2B73F}\x{2B740}-\x{2B81F}\x{2B820}-\x{2CEAF}\x{F900}-\x{FAFF}\x{2F800}-\x{2FA1F}\x{3040}-\x{309F}\x{30A0}-\x{30FF}\x{3021}\x{2E88}\x{2E84}\x{2EBC}\x{2ED6}\x{2E97}\x{2ECC}\x{2ED7}\x{2E95}]/u', $lang);
+        return preg_match('/['
+            . '\x{4E00}-\x{9FFF}'      // Kanji cơ bản
+            . '\x{3400}-\x{4DBF}'      // Kanji mở rộng A
+            . '\x{20000}-\x{2A6DF}'    // Kanji mở rộng B
+            . '\x{2A700}-\x{2B73F}'    // Kanji mở rộng C
+            . '\x{2B740}-\x{2B81F}'    // Kanji mở rộng D
+            . '\x{2B820}-\x{2CEAF}'    // Kanji mở rộng E
+            . '\x{F900}-\x{FAFF}'      // Kanji tương thích
+            . '\x{2F800}-\x{2FA1F}'    // Kanji bổ sung
+            . '\x{3040}-\x{309F}'      // Hiragana
+            . '\x{30A0}-\x{30FF}'      // Katakana
+            . '\x{3021}'               // 〡 (Hàng Châu số 1)
+            . '\x{2E88}\x{2E84}'       // ⺈ (U+2E88), ⺄ (U+2E84)
+            . '\x{2EBC}\x{2ED6}'       // ⺼ (U+2EBC), ⻖ (U+2ED6)
+            . '\x{2E97}\x{2E8C}'       // ⺗ (U+2E97), ⺌ (U+2E8C) <-- ĐÃ SỬA TỪ 2ECC → 2E8C
+            . '\x{2ED7}\x{2E95}'       // ⻗ (U+2ED7), ⺕ (U+2E95)
+            . ']/u', $lang);
     }
 }
