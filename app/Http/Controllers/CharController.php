@@ -16,73 +16,121 @@ class CharController extends Controller
     {
         $chars = Char::with('comments.interactive');
         $search = $request->search;
-        if (($request->type == Char::WORD || $request->type == Char::KANJI) && $search) {
-            if ($this->isJapanese($search)) {
-                $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
-                    $q->where('word', 'like', "%$search%")->orWhere('reading', 'like', "%$search%");
-                });
-            } else {
-                $chars->where('type', Char::WORD)->where(function ($q) use ($search) {
-                    $startWithWord = $search . " ";
-                    $endWithWord = " " . $search;
-                    $exactWord = $search;
-                    $middleWord = " " . $search . " ";
-                    $commaLeftWord = "," . $search;
-                    $commaRightWord = $search . ",";
-                    $bracketLeftWord = "(" . $search;
-                    $bracketRightWord = $search . ")";
-                    $q->where('meaning', 'like', "$startWithWord%")
-                        ->orWhere('meaning', 'like', "%$endWithWord")
-                        ->orWhere('meaning', 'like', "$exactWord")
-                        ->orWhere('meaning', 'like', "%$middleWord%")
-                        ->orWhere('meaning', 'like', "%$commaLeftWord%")
-                        ->orWhere('meaning', 'like', "%$commaRightWord%")
-                        ->orWhere('meaning', 'like', "%$bracketLeftWord%")
-                        ->orWhere('meaning', 'like', "%$bracketRightWord%");
-                });
-            }
-        }
-        if ($request->type == Char::ENGLISH && $search) {
-            $chars->where('word', 'like', "$search%");
-        }
-        if ($request->search_kanji) {
-            $search = $request->search_kanji;
-            if ($this->isJapanese($search)) {
-                $charsArr = [];
-                $length = mb_strlen($search, 'UTF-8');
-                for ($i = 0; $i < $length; $i++) {
-                    $charsArr[] = mb_substr($search, $i, 1, 'UTF-8');
-                }
-                $charsArr = array_slice($charsArr, 0, 20);
+        $type = $request->type;
 
-                // Tạo chuỗi truy vấn BINARY cho từng ký tự
-                $chars->where('type', Char::KANJI)
-                    ->where(function ($q) use ($charsArr) {
-                        foreach ($charsArr as $char) {
+        // Luôn filter theo type nếu có
+        if ($type !== null && $type !== '') {
+            $chars->where('type', $type);
+        }
+        if ($type == Char::KANJI && (empty($search) || trim($search) === '')) {
+            $search = $request->search_kanji;
+        }
+
+        if ($search && $type == Char::KANJI) {
+                if ($this->isJapanese($search)) {
+                    // Nếu input là tiếng Nhật, tách từng ký tự và tìm theo word IN (...)
+                    $charsArray = preg_split('//u', $search, -1, PREG_SPLIT_NO_EMPTY);
+                    $chars->where(function ($q) use ($charsArray) {
+                        foreach ($charsArray as $char) {
                             $q->orWhereRaw("BINARY `word` = ?", [$char]);
                         }
                     });
-            } else {
-                // Logic cũ, bỏ tìm kiếm ở trường word
-                $chars->where('type', Char::KANJI)
-                      ->where(function ($q) use ($search) {
-                          $q->where('reading', 'like', "$search%")
-                            ->orWhere('meaning', 'like', "$search%");
-                      });
-            }
+                } else {
+                    // Search cho Kanji: tìm trên cả word (ký tự) và meaning (nghĩa tiếng Việt)
+                    $searchKhongDau = $this->stripVietnameseAccents($search);
+
+                    $chars->where(function ($q) use ($search, $searchKhongDau) {
+                        $q->orWhere('word', $search)
+                        ->orWhere('meaning', $search)
+                        ->orWhere('word', 'like', "%$search%")
+                        ->orWhere('reading', $search)
+                        ->orWhere('reading', 'like', "$search%")
+                        ->orWhere('meaning', 'like', "$search %")
+                        ->orWhere('meaning', 'like', " $search %")
+                        ->orWhere('word_khongdau', $searchKhongDau)
+                        ->orWhere('meaning_khongdau', $searchKhongDau)
+                        ->orWhere('word_khongdau', 'like', "%$searchKhongDau%")
+                        ->orWhere('meaning_khongdau', 'like', "% $searchKhongDau %");
+                    });
+
+                    $chars->orderByRaw(
+                        "CASE
+                            WHEN word = ? THEN 0
+                            WHEN meaning = ? THEN 1
+                            WHEN word LIKE ? THEN 2
+                            WHEN word LIKE ? THEN 3
+                            WHEN word LIKE ? THEN 4
+                            WHEN meaning LIKE ? THEN 5
+                            WHEN meaning LIKE ? THEN 6
+                            WHEN meaning LIKE ? THEN 7
+                            WHEN word_khongdau = ? THEN 8
+                            WHEN meaning_khongdau = ? THEN 9
+                            WHEN word_khongdau LIKE ? THEN 10
+                            WHEN meaning_khongdau LIKE ? THEN 11
+                            ELSE 12
+                        END",
+                        [
+                            $search,
+                            $search,
+                            "$search %",      // đầu từ
+                            "% $search",      // cuối từ
+                            "% $search %",    // ở giữa
+                            "$search %",      // meaning đầu từ
+                            "% $search",      // meaning cuối từ
+                            "% $search %",    // meaning ở giữa
+                            $searchKhongDau,
+                            $searchKhongDau,
+                            "%$searchKhongDau%",
+                            "%$searchKhongDau%"
+                        ]
+                    );
+                }
+        }
+        elseif ($search && in_array($type, [Char::WORD, Char::ENGLISH])) {
+            // Search cho từ vựng tiếng Nhật và tiếng Anh
+            $searchKhongDau = $this->stripVietnameseAccents($search);
+
+            $chars->where(function ($q) use ($search, $searchKhongDau) {
+                $q->orWhere('word', $search)
+                  ->orWhere('meaning', $search)
+                  ->orWhere('word', 'like', "%$search%")
+                  ->orWhere('meaning', 'like', "$search %")
+                  ->orWhere('reading', $search)
+                  ->orWhere('reading', 'like', "$search%")
+                  ->orWhere('meaning', 'like', " $search %")
+                  ->orWhere('word_khongdau', $searchKhongDau)
+                  ->orWhere('meaning_khongdau', $searchKhongDau)
+                  ->orWhere('word_khongdau', 'like', "%$searchKhongDau%")
+                  ->orWhere('meaning_khongdau', 'like', "% $searchKhongDau %");
+            });
+
+            $chars->orderByRaw(
+                "CASE
+                    WHEN word = ? THEN 0
+                    WHEN meaning = ? THEN 0
+                    WHEN word LIKE BINARY ? THEN 1
+                    WHEN meaning LIKE BINARY ? THEN 1
+                    ELSE 2
+                END ASC, 
+                LEAST(
+                    IF(LOCATE(?, word) > 0, LENGTH(word), 9999),
+                    IF(LOCATE(?, meaning) > 0, LENGTH(meaning), 9999)
+                ) ASC,
+                id ASC",
+                [
+                    $search,
+                    $search,
+                    "%$search%",
+                    "%$search%",
+                    $search,
+                    $search
+                ]
+            );
         }
 
+        // Các filter khác
         if ($request->book) {
             $chars->where('book', $request->book);
-        }
-
-        if ($request->type) {
-            $chars->where('type', $request->type);
-        }
-
-        // Add sorting logic here
-        if ($search) {
-            $chars->orderByRaw("CASE WHEN word = ? THEN 0 ELSE 1 END", [$search]);
         }
 
         $response = [
@@ -168,7 +216,11 @@ class CharController extends Controller
             return response()->json(['errors' => $validator->errors()]);
         }
 
-        $char = Char::create($request->all());
+        $data = $request->all();
+        $data['word_khongdau'] = $this->stripVietnameseAccents($data['word'] ?? '');
+        $data['meaning_khongdau'] = $this->stripVietnameseAccents($data['meaning'] ?? '');
+
+        $char = Char::create($data);
         if ($char) {
             return response()->json([
                 'status' => 201
@@ -363,5 +415,29 @@ private function isJapanese($lang)
         . '\x{2A6D6}' // 𪛖
         . '\x{2B740}' // 𫝀
         . ']/u', $lang);
+}
+
+// Thêm hàm loại bỏ dấu tiếng Việt
+private function stripVietnameseAccents($str) {
+    $accents_arr = [
+        'a'=>'á|à|ả|ã|ạ|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ',
+        'd'=>'đ',
+        'e'=>'é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ',
+        'i'=>'í|ì|ỉ|ĩ|ị',
+        'o'=>'ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ',
+        'u'=>'ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự',
+        'y'=>'ý|ỳ|ỷ|ỹ|ỵ',
+        'A'=>'Á|À|Ả|Ã|Ạ|Ă|Ắ|Ằ|Ẳ|Ẵ|Ặ|Â|Ấ|Ầ|Ẩ|Ẫ|Ậ',
+        'D'=>'Đ',
+        'E'=>'É|È|Ẻ|Ẽ|Ẹ|Ê|Ế|Ề|Ể|Ễ|Ệ',
+        'I'=>'Í|Ì|Ỉ|Ĩ|Ị',
+        'O'=>'Ó|Ò|Ỏ|Õ|Ọ|Ô|Ố|Ồ|Ổ|Ỗ|Ộ|Ơ|Ớ|Ờ|Ở|Ỡ|Ợ',
+        'U'=>'Ú|Ù|Ủ|Ũ|Ụ|Ư|Ứ|Ừ|Ử|Ữ|Ự',
+        'Y'=>'Ý|Ỳ|Ỷ|Ỹ|Ỵ',
+    ];
+    foreach($accents_arr as $nonAccent=>$accent){
+        $str = preg_replace("/($accent)/i", $nonAccent, $str);
+    }
+    return $str;
 }
 }
