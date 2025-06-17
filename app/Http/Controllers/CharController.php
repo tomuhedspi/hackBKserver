@@ -217,8 +217,14 @@ class CharController extends Controller
         }
 
         $data = $request->all();
-        $data['word_khongdau'] = $this->stripVietnameseAccents($data['word'] ?? '');
-        $data['meaning_khongdau'] = $this->stripVietnameseAccents($data['meaning'] ?? '');
+
+        // Xử lý meaning_khongdau: bỏ dấu, thay dấu ngắt câu thành space, thêm space đầu/cuối
+        $meaning_khongdau = $this->stripVietnameseAccents($data['meaning'] ?? '');
+        $meaning_khongdau = preg_replace('/[.,;:!?()\[\]{}"\'\-_…\/\\\|<>]/u', ' ', $meaning_khongdau);
+        $meaning_khongdau = preg_replace('/\s+/u', ' ', $meaning_khongdau);
+        $meaning_khongdau = ' ' . trim($meaning_khongdau) . ' ';
+
+        $data['meaning_khongdau'] = $meaning_khongdau;
 
         $char = Char::create($data);
         if ($char) {
