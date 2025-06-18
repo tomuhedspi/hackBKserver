@@ -24,6 +24,7 @@ class CharResource extends JsonResource
             'book' => $this->book, 
             'meaning' => $this->meaning,
             'type' => $this->type,
+            'pos' => $this->pos,
             'kun' => $this->kun,
             'on' => $this->on,
             'example' => $this->example,

@@ -210,6 +210,7 @@ class CharController extends Controller
             'meaning' => 'required|max:255',
             'created_by' => 'nullable|max:255',
             'child' => 'nullable|max:255',
+            'pos' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
