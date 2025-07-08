@@ -38,3 +38,4 @@ Route::get('/hints/english', [EnglishHintController::class, 'getPhoneticHints'])
 Route::get('/hints/japanese', [JapaneseHintController::class, 'getPhoneticHints']);
 Route::get('/exact', [CharController::class, 'exactSearch']); // New route for exact search
 Route::get('char/{id}/radicals-tree', [CharController::class, 'radicalsTree']);
+Route::post('/check-missing-words', [CharController::class, 'checkMissingWords']);

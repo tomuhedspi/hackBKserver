@@ -447,4 +447,34 @@ private function stripVietnameseAccents($str) {
     }
     return $str;
 }
+
+    // API: Kiểm tra danh sách từ chưa có trong database
+    public function checkMissingWords(Request $request)
+    {
+        $wordsRaw = $request->input('words', '');
+        $type = $request->input('type');
+        // Tách từ theo các ký tự phân cách: dấu chấm, phẩy, xuống dòng, gạch ngang, ngoặc đơn, ngoặc kép
+        $words = preg_split('/[\.,\n\r\-\(\)"\'\,]+/u', $wordsRaw);
+        $words = array_map('trim', $words);
+        $words = array_filter($words, function($w) { return $w !== ''; });
+        $words = array_unique($words);
+        if (empty($words) || $type === null) {
+            return response()->json([
+                'status' => 400,
+                'message' => 'Missing words or type'
+            ], 400);
+        }
+        // Lấy các từ đã có trong DB
+        $existing = \DB::table('chars')
+            ->where('type', $type)
+            ->whereIn('word', $words)
+            ->pluck('word')
+            ->toArray();
+        // Trả về các từ chưa có
+        $missing = array_values(array_diff($words, $existing));
+        return response()->json([
+            'status' => 200,
+            'missing' => $missing
+        ]);
+    }
 }
