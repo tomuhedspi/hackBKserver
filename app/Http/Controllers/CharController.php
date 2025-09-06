@@ -481,73 +481,64 @@ private function stripVietnameseAccents($str) {
 
     public function multiExactSearch(Request $request)
     {
-        $chars = Char::with('comments.interactive');
         $search = $request->input('search', '');
-        $mode = strtolower($request->input('mode', 'all')); // mặc định là 'all'
-
-        // Số bản ghi mỗi trang
+        $mode = strtolower($request->input('mode', 'all'));
         $perPage = intval($request->input('per_page', 20));
         $page = intval($request->input('page', 1));
 
+        $keywords = [];
         if ($search) {
             $keywords = preg_split('/[,\n\r\t\.\:\;]/u', $search);
             $keywords = array_map('trim', $keywords);
             $keywords = array_filter($keywords, function($w) { return $w !== ''; });
             $keywords = array_unique($keywords);
-
-            if (!empty($keywords)) {
-                if ($mode === 'all') {
-                    $chars->whereIn('word', $keywords);
-                    if ($request->type) {
-                        $chars->where('type', $request->type);
-                    }
-                    if ($request->book) {
-                        $chars->where('book', $request->book);
-                    }
-                    $result = $chars->paginate($perPage);
-                } else {
-                    $query = Char::query()->with('comments.interactive');
-                    if ($request->type) {
-                        $query->where('type', $request->type);
-                    }
-                    if ($request->book) {
-                        $query->where('book', $request->book);
-                    }
-                    $items = [];
-                    foreach ($keywords as $kw) {
-                        if ($mode === 'oldest') {
-                            $item = (clone $query)->where('word', $kw)->orderBy('id', 'asc')->first();
-                        } else { // newest
-                            $item = (clone $query)->where('word', $kw)->orderBy('id', 'desc')->first();
-                        }
-                        if ($item) {
-                            $items[] = $item;
-                        }
-                    }
-                    // Phân trang cho mảng $items
-                    $total = count($items);
-                    $pagedItems = array_slice($items, ($page - 1) * $perPage, $perPage);
-                    $paginator = new LengthAwarePaginator(
-                        $pagedItems,
-                        $total,
-                        $perPage,
-                        $page,
-                        ['path' => $request->url(), 'query' => $request->query()]
-                    );
-                    $result = new CharCollection($paginator);
-                }
-            } else {
-                $result = $chars->paginate($perPage);
-            }
-        } else {
-            $result = $chars->paginate($perPage);
         }
 
-        $response = [
+        $items = [];
+        if (!empty($keywords)) {
+            if ($mode === 'all') {
+                $chars = Char::with('comments.interactive');
+                $chars->whereIn('word', $keywords);
+                if ($request->type) $chars->where('type', $request->type);
+                if ($request->book) $chars->where('book', $request->book);
+                $paginator = $chars->paginate($perPage);
+                $result = new CharCollection($paginator);
+            } else {
+                $query = Char::query()->with('comments.interactive');
+                if ($request->type) $query->where('type', $request->type);
+                if ($request->book) $query->where('book', $request->book);
+                foreach ($keywords as $kw) {
+                    if ($mode === 'oldest') {
+                        $item = (clone $query)->where('word', $kw)->orderBy('id', 'asc')->first();
+                    } else { // newest
+                        $item = (clone $query)->where('word', $kw)->orderBy('id', 'desc')->first();
+                    }
+                    if ($item) $items[] = $item;
+                }
+                // Phân trang cho mảng $items
+                $total = count($items);
+                $pagedItems = array_slice($items, ($page - 1) * $perPage, $perPage);
+                $paginator = new LengthAwarePaginator(
+                    $pagedItems,
+                    $total,
+                    $perPage,
+                    $page,
+                    ['path' => $request->url(), 'query' => $request->query()]
+                );
+                $result = new CharCollection($paginator);
+            }
+        } else {
+            // Không có keyword, trả về tất cả (phân trang)
+            $chars = Char::with('comments.interactive');
+            if ($request->type) $chars->where('type', $request->type);
+            if ($request->book) $chars->where('book', $request->book);
+            $paginator = $chars->paginate($perPage);
+            $result = new CharCollection($paginator);
+        }
+
+        return response()->json([
             'status' => 200,
             'data' => $result
-        ];
-
-        return response()->json($response, 200);
+        ], 200);
     }
 }
