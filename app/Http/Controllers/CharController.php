@@ -501,6 +501,7 @@ private function stripVietnameseAccents($str) {
                 $chars->whereIn('word', $keywords);
                 if ($request->type) $chars->where('type', $request->type);
                 if ($request->book) $chars->where('book', $request->book);
+                $chars->orderBy('word');
                 $paginator = $chars->paginate($perPage);
                 $result = new CharCollection($paginator);
             } else {
